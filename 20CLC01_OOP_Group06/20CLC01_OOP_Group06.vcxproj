@@ -19,27 +19,27 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\animal.cpp" />
-    <ClCompile Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\car.cpp" />
-    <ClCompile Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\console.cpp" />
-    <ClCompile Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\game.cpp" />
-    <ClCompile Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\lane.cpp" />
-    <ClCompile Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\light.cpp" />
-    <ClCompile Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\main.cpp" />
-    <ClCompile Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\people.cpp" />
-    <ClCompile Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\point.cpp" />
-    <ClCompile Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\vehicle.cpp" />
+    <ClCompile Include="animal.cpp" />
+    <ClCompile Include="car.cpp" />
+    <ClCompile Include="console.cpp" />
+    <ClCompile Include="game.cpp" />
+    <ClCompile Include="lane.cpp" />
+    <ClCompile Include="light.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="people.cpp" />
+    <ClCompile Include="point.cpp" />
+    <ClCompile Include="vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\animal.h" />
-    <ClInclude Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\car.h" />
-    <ClInclude Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\console.h" />
-    <ClInclude Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\game.h" />
-    <ClInclude Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\lane.h" />
-    <ClInclude Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\light.h" />
-    <ClInclude Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\people.h" />
-    <ClInclude Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\point.h" />
-    <ClInclude Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\vehicle.h" />
+    <ClInclude Include="animal.h" />
+    <ClInclude Include="car.h" />
+    <ClInclude Include="console.h" />
+    <ClInclude Include="game.h" />
+    <ClInclude Include="lane.h" />
+    <ClInclude Include="light.h" />
+    <ClInclude Include="people.h" />
+    <ClInclude Include="point.h" />
+    <ClInclude Include="vehicle.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
