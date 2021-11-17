@@ -15,8 +15,64 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="20CLC01_OOP_Group06.cpp">
+    <ClCompile Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\animal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\car.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\console.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\lane.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\light.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\people.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\point.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\vehicle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\animal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\car.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\console.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\lane.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\people.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\point.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\20CLC01_OOP_Group06\20CLC01_OOP_Group06\vehicle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
