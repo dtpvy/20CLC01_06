@@ -18,13 +18,11 @@ public:
 	void goDown();
 	bool isFinish();
 	bool isDead();
-	void draw();
+	void draw();     
 	void deleteChar();
 	bool isImpact(car* carArr, int lane);
 };
 
 #endif // !_people_h
-
-
 
 

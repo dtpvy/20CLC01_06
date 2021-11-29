@@ -11,22 +11,29 @@
 #include <conio.h>
 #include <fstream>
 #include <time.h>
+#define cWidth 1036
+#define cHeight 600
+#define UP 72
+#define LEFT 75
+#define RIGHT 77
+#define DOWN 80
 using namespace std;
 
 class game
 {
 private:
-	people user;
+	people player;
 	int score;
 	vector<lane> laneArr;
 public:
 	game();
 	~game();
 	void drawGame();
-	void drawMenu1();
-	void drawMenu2();
+	void drawHome();
+	void drawMenuGame(int x, int y);
+	void drawMenuHome();
 	void createGame(int level);
-	void updatePosPeople(char);
+	void updatePosPeople(int c);
 	void lvUp();
 	void gameSetting();
 	void drawDie();
@@ -40,8 +47,10 @@ public:
 	void startGame();
 	void loadGame();
 	void saveGame();
+	void settingGame();
 	void pauseGame(HANDLE);
 	void resumeGame(HANDLE);
+	void updateLane();
 };
 
 #endif // !_game_h
