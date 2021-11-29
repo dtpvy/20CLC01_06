@@ -28,6 +28,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="people.cpp" />
     <ClCompile Include="point.cpp" />
+    <ClCompile Include="snake.cpp" />
     <ClCompile Include="vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -39,6 +40,7 @@
     <ClInclude Include="light.h" />
     <ClInclude Include="people.h" />
     <ClInclude Include="point.h" />
+    <ClInclude Include="snake.h" />
     <ClInclude Include="vehicle.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
