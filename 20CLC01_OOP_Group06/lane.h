@@ -16,7 +16,7 @@ private:
 	light tLight;
 	bool _light;
 public:
-	lane();
+	lane() {};
 	lane(bool type = true, bool _light = false);
 	void drawRoad();
 	void drawRoadside();
@@ -24,6 +24,9 @@ public:
 	void updatePosVehicle();
 	void updatePosAnimal();
 	void updateTraffic();
+	void deleteChar();
+	void reset();
+	bool writeFile();
 };
 
 #endif // !_lane_h

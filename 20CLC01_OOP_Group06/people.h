@@ -11,7 +11,7 @@ private:
 public:
 	people();
 	people(int, int);
-	void reSet();
+	void reset();
 	void goUp();
 	void goLeft();
 	void goRight();
