@@ -153,6 +153,15 @@ void game::drawMenuHome()
 	}
 }
 
+void game::createGame(int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		lane cLane(i);
+		laneArr.push_back(cLane);
+	}
+}
+
 void game::updatePosPeople(int c)
 {
 	switch (c)
@@ -189,6 +198,73 @@ void game::startGame()
 	drawGame();
 }
 
+void game::loadGame()
+{
+	ifstream infile;
+	string file;
+	cout << "Nhap ten duong dan file" << endl;
+	getline(cin, file);
+	clrscr();
+	infile.open(file, ios::in);
+	if (infile.fail())
+	{
+		TextColor(ColorCode_Green);
+		cout << "DU LIEU KHONG TON TAI, BAT DAU TRO CHOI." << endl;
+		TextColor(7);
+		system("pause");
+		clrscr();
+		return;
+	}
+	laneArr.clear();
+	int n;
+	infile >> this->score >> n;
+	for (int i = 0; i < n; i++)
+	{
+		int type;
+		int light;
+		int m;
+		infile >> type >> light >> m;
+		lane tmp(type, light);
+		for (int j = 0; j < m; j++)
+		{
+			
+		}	
+		laneArr.push_back(tmp);
+	}
+	infile.close();
+}
+
+void game::saveGame()
+{
+	fstream fo;
+	TextColor(ColorCode_Green);
+	ofstream outfile;
+	string file;
+	cout << "Nhap ten file Can Luu" << endl;
+	getline(cin, file);
+	outfile.open(file);
+	TextColor(7);
+	outfile << score << " " << this->getLane();
+	for (int i = 0; i < laneArr.size(); i++)
+	{
+		laneArr[i].writeFile();
+	}
+	outfile.close();
+	clrscr();
+	this->startGame();
+	return;
+}
+
+void game::pauseGame(HANDLE t)
+{
+	SuspendThread(t);
+}
+
+void game::resumeGame(HANDLE t)
+{
+	ResumeThread(t);
+}
+
 void game::updateLane()
 {
 	for (int i = 0; i < laneArr.size(); i++)
@@ -204,6 +280,39 @@ void game::drawDie()
 	cout << s;
 }
 
-void game::updatePosAnimal()
+int game::speedGame(int y)
 {
+	return 200 - y/10;
 }
+
+int game::getLane()
+{
+	return this->laneArr.size();
+}
+
+bool game::isRunning()
+{
+	return !player.isDead();
+}
+
+void game::resetGame()
+{
+	player.deleteChar();
+	for (int i = 0; i < laneArr.size(); i++)
+	{
+		laneArr[i].deleteChar();
+	}
+	player.reset();
+	for (int i = 0; i < laneArr.size(); i++)
+	{
+		laneArr[i].reset();
+	}
+}
+
+void game::exitGame(HANDLE)
+{
+	system("cls");
+	exit(0);
+}
+
+
