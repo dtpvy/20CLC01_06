@@ -26,3 +26,13 @@ void point::moveXY(int x, int y)
 	this->x = x;
 	this->y = y;
 }
+
+void point::writeFile(fstream& fo)
+{
+	fo << this->x << " " << this->y;
+}
+
+void point::readFile(fstream& fi)
+{
+	fi >> this->x >> this->y;
+}

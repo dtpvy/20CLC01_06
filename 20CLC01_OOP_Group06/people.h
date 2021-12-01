@@ -11,20 +11,18 @@ private:
 public:
 	people();
 	people(int, int);
-	void reSet();
+	void reset();
 	void goUp();
 	void goLeft();
 	void goRight();
 	void goDown();
 	bool isFinish();
 	bool isDead();
-	void draw();
+	void draw();     
 	void deleteChar();
 	bool isImpact(car* carArr, int lane);
 };
 
 #endif // !_people_h
-
-
 
 

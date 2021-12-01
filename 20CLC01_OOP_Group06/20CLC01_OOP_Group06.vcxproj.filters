@@ -45,7 +45,11 @@
     <ClCompile Include="light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="truck.cpp">
+=======
+    <ClCompile Include="snake.cpp">
+>>>>>>> 20c8bfb8bf2029ea4b37d9a68802a7bc2a6fa237
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,7 +81,11 @@
     <ClInclude Include="light.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="truck.h">
+=======
+    <ClInclude Include="snake.h">
+>>>>>>> 20c8bfb8bf2029ea4b37d9a68802a7bc2a6fa237
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
