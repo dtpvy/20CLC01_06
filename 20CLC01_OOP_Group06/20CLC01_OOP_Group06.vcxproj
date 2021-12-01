@@ -28,28 +28,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="people.cpp" />
     <ClCompile Include="point.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="truck.cpp" />
-=======
     <ClCompile Include="snake.cpp" />
->>>>>>> 20c8bfb8bf2029ea4b37d9a68802a7bc2a6fa237
     <ClCompile Include="vehicle.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="animal.h" />
-    <ClInclude Include="car.h" />
-    <ClInclude Include="console.h" />
-    <ClInclude Include="game.h" />
-    <ClInclude Include="lane.h" />
-    <ClInclude Include="light.h" />
-    <ClInclude Include="people.h" />
-    <ClInclude Include="point.h" />
-<<<<<<< HEAD
-    <ClInclude Include="truck.h" />
-=======
-    <ClInclude Include="snake.h" />
->>>>>>> 20c8bfb8bf2029ea4b37d9a68802a7bc2a6fa237
-    <ClInclude Include="vehicle.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
