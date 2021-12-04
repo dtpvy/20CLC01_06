@@ -5,7 +5,7 @@ void game::drawGame()
 	player.draw(13, 13);
 	for (int i = 0; i < laneArr.size(); i++)
 	{
-		laneArr[i].drawRoad();
+		laneArr[i].draw();
 	}
 }
 
@@ -153,11 +153,29 @@ void game::drawMenuHome()
 	}
 }
 
-void game::createGame(int size)
+void game::createGame()
 {
-	for (int i = 0; i < size; i++)
+	lane tmp;
+	laneArr.push_back(tmp);
+	for (int i = HEIGHT-4; i >= 0; i-=4)
 	{
-		lane cLane(i);
+		int type = rand() % 6;
+		int num = rand() % 5 + 1;
+		lane cLane;
+		switch (type)
+		{
+			case 1: case 2: 
+			{
+				cLane.createLane(type, rand() % 2, num, i);
+				break;
+			}
+			case 3: case 4: case 5:
+			{
+				cLane.createLane(type, num, i);
+				break;
+			}
+		}
+
 		laneArr.push_back(cLane);
 	}
 }
@@ -193,28 +211,18 @@ void game::updatePosPeople(int c)
 
 void game::lvUp()
 {
-	peoPle.deleteChar();
-	for (int i = 0; i < m_level; i++)
-	{
-		bird[i].deleteChar();
-		diNausor[i].deleteChar();
-		truck[i].deleteChar();
-		car[i].deleteChar();
-	}
-	delete[] car;
-	delete[] bird;
-	delete[] truck;
-	delete[] diNausor;
-	if (m_level == LV_MAX)
+	player.deleteChar();
+	laneArr.clear();
+	if (lv == lvMax)
 	{
 		gotoXY(2, HEIGHT + 2);
 		cout << "You win";
 		_getch();
 		exit(0);
 	}
-	m_level++;
-	peoPle.reSet();
-	this->createGame(m_level);
+	lv++;
+	player.reset();
+	this->createGame();
 }
 
 void game::startGame()
@@ -310,7 +318,8 @@ void game::updateLane()
 {
 	for (int i = 0; i < laneArr.size(); i++)
 	{
-		
+		laneArr[i].updateLane();
+		laneArr[i].updateLightTraffic();
 	}
 }
 
@@ -326,9 +335,9 @@ void game::drawDie()
 	cout << s;
 }
 
-int game::speedGame(int y)
+int game::speedGame()
 {
-	return 200 - y/10;
+	return (((double)lvMax-lv+1)/10)*100;
 }
 
 int game::getLane()

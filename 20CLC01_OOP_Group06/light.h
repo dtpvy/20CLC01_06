@@ -3,6 +3,7 @@
 #define _light_h
 #include "point.h"
 #define greenLight 10
+#define redLight 10
 
 class light: public point
 {
@@ -16,6 +17,7 @@ public:
 	void set(bool status, int time);
 	void changeStatus();
 	void updateTime();
+	void draw();
 };
 
 

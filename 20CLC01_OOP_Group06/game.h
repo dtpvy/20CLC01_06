@@ -34,12 +34,12 @@ public:
 	void drawHome();
 	void drawMenuGame(int x, int y);
 	void drawMenuHome();
-	void createGame(int size);
+	void createGame();
 	void updatePosPeople(int c);
 	void lvUp();
 	void gameSetting();
 	void drawDie();
-	int speedGame(int y);
+	int speedGame();
 	int getLane();
 	people getPeople();
 	void Delete();

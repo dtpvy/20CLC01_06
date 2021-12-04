@@ -28,11 +28,10 @@ private:
 	bool _light;
 public:
 	lane();
-	lane(int type, bool _light, int num, int y);
-	lane(int type, int num, int y);
+	void createLane(int type, bool _light, int num, int y);
+	void createLane(int type, int num, int y);
 	void draw();
-	void updatePosVehicle();
-	void updatePosAnimal();
+	void updateLane();
 	void updateLightTraffic();
 	void deleteChar();
 	bool checkLane(people p);
@@ -43,6 +42,7 @@ public:
 	bool writeFile(fstream& fo);
 	vehicle* createVehicle(int type, int x, int y);
 	animal* createAnimal(int type, int x, int y);
+	
 };
 
 

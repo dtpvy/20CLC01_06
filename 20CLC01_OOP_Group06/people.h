@@ -29,7 +29,6 @@ public:
 	bool isDead();
 	void draw(int Hcolor, int Bcolor);     
 	void deleteChar();
-	bool isImpact(car* carArr, int lane);
 };
 
 #endif // !_people_h

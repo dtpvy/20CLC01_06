@@ -34,11 +34,6 @@ void SubThread()
 		}
 		MOVING = ' ';// Tạm khóa không cho di chuyển, chờ nhận phím từ hàm main
 		
-		//kiem tra den giao thong
-		if (!cg->getTraffic().getStatus())
-		{
-			cg->updatePosVehicle();//Cập nhật vị trí xe
-		}
 		cg->updateLane(); //Cập nhật vị trí thú
 		cg->drawGame(); //ve
 
@@ -55,8 +50,6 @@ void SubThread()
 				system("pause");
 
 				cg->startGame();
-				mciSendStringA("play nen.mp3", 0, NULL, 0);
-				cg->resetGame(LV_MIN);
 			}
 
 			else
@@ -69,7 +62,7 @@ void SubThread()
 
 			cg->lvUp();
 		}
-		Sleep(cg->speedGame());
+		Sleep(cg->speedGame(cg->getPeople().getY()));
 
 	}
 }
@@ -79,9 +72,7 @@ int main()
 {
 	cg = new game;
 	char temp;
-	FixConsoleWindow();
-	cg->DangNhap();
-	mciSendStringA("play nen.mp3", 0, NULL, 0);
+	SetWindowSize();
 	thread t1(SubThread);
 	while (1)
 	{

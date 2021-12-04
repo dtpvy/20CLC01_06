@@ -5,7 +5,7 @@ lane::lane()
 	
 }
 
-lane::lane(int type, bool _light, int num, int y)
+void lane::createLane(int type, bool _light, int num, int y)
 {
 	srand(time(NULL));
 	this->type = type;
@@ -22,7 +22,7 @@ lane::lane(int type, bool _light, int num, int y)
 	}
 }
 
-lane::lane(int type, int num, int y)
+void lane::createLane(int type, int num, int y)
 {
 	this->type = type;
 	int x = 0;
@@ -33,17 +33,14 @@ lane::lane(int type, int num, int y)
 	}
 }
 
-void lane::updatePosVehicle()
+void lane::updateLane()
 {
+	if (_light && !tLight.getStatus()) return;
 	for (int i = 0; i < vehicleArr.size(); i++)
 	{
 		vehicleArr[i]->deleteChar();
 		vehicleArr[i]->run();
 	}
-}
-
-void lane::updatePosAnimal()
-{
 	for (int i = 0; i < animalArr.size(); i++)
 	{
 		animalArr[i]->deleteChar();
