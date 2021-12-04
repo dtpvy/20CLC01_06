@@ -13,6 +13,7 @@
     <ClCompile Include="truck.cpp" />
     <ClCompile Include="snake.cpp" />
     <ClCompile Include="vehicle.cpp" />
+<<<<<<< HEAD
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animal.h" />
@@ -28,5 +29,13 @@
     <ClInclude Include="snake.h" />
     <ClInclude Include="truck.h" />
     <ClInclude Include="vehicle.h" />
+=======
+    <ClCompile Include="dog.cpp" />
+    <ClCompile Include="crawfish.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="dog.h" />
+    <ClInclude Include="crawfish.h" />
+>>>>>>> 44125aa3f0466ec303d296e28718d1617945c7f6
   </ItemGroup>
 </Project>

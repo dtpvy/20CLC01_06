@@ -22,6 +22,8 @@
     <ClCompile Include="animal.cpp" />
     <ClCompile Include="car.cpp" />
     <ClCompile Include="console.cpp" />
+    <ClCompile Include="crawfish.cpp" />
+    <ClCompile Include="dog.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="lane.cpp" />
     <ClCompile Include="light.cpp" />
@@ -33,19 +35,8 @@
     <ClCompile Include="vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="animal.h" />
-    <ClInclude Include="car.h" />
-    <ClInclude Include="console.h" />
     <ClInclude Include="crawfish.h" />
     <ClInclude Include="dog.h" />
-    <ClInclude Include="game.h" />
-    <ClInclude Include="lane.h" />
-    <ClInclude Include="light.h" />
-    <ClInclude Include="people.h" />
-    <ClInclude Include="point.h" />
-    <ClInclude Include="snake.h" />
-    <ClInclude Include="truck.h" />
-    <ClInclude Include="vehicle.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -58,26 +49,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
