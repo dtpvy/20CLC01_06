@@ -1,13 +1,5 @@
 ﻿#include "peoPle.h"
 #include "game.h"
-<<<<<<< HEAD
-#include "truck.h"
-int main() {
-	car x(0, 10);
-	x.draw();
-	truck y(6, 20);
-	y.draw();
-=======
 #include <conio.h>
 #include <thread>
 game* cg;
@@ -23,7 +15,6 @@ void SetWindowSize(SHORT width, SHORT height)
 
 	SetConsoleWindowInfo(hStdout, 1, &WindowSize);
 }
->>>>>>> 20c8bfb8bf2029ea4b37d9a68802a7bc2a6fa237
 
 void ShowCur(bool CursorVisibility) // xóa dấu con trỏ
 {
@@ -42,21 +33,19 @@ void SubThread()
 			cg->updatePosPeople(MOVING);//Cập nhật vị trí người theo thông tin từ main
 		}
 		MOVING = ' ';// Tạm khóa không cho di chuyển, chờ nhận phím từ hàm main
+		
+		//kiem tra den giao thong
 		if (!cg->getTraffic().getStatus())
 		{
 			cg->updatePosVehicle();//Cập nhật vị trí xe
 		}
-		cg->updatePosAnimal(); //Cập nhật vị trí thú
-		cg->updateTraffic();
+		cg->updateLane(); //Cập nhật vị trí thú
 		cg->drawGame(); //ve
-		int lv = cg->getLevel();
-		if (cg->getPeople().isImpact(cg->getBird(), lv) || cg->getPeople().isImpact(cg->getDinausou(), lv)
-			|| cg->getPeople().isImpact(cg->getCar(), lv) || cg->getPeople().isImpact(cg->getTruck(), lv))
+
+		//kiem tra nguoi voi cac vi tri
+		if (cg->checkLane())
 		{
 			//xử lí khi chết
-			mciSendStringA("stop nen.mp3", 0, NULL, 0);
-			mciSendStringA("play die.mp3", 0, NULL, 0);
-
 			cg->drawDie();
 			gotoXY(1, HEIGHT + 3);
 			cout << " nhan Y de tiep tuc tro choi";

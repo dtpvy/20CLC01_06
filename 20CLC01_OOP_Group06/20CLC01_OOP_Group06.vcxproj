@@ -32,6 +32,21 @@
     <ClCompile Include="snake.cpp" />
     <ClCompile Include="vehicle.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="animal.h" />
+    <ClInclude Include="car.h" />
+    <ClInclude Include="console.h" />
+    <ClInclude Include="crawfish.h" />
+    <ClInclude Include="dog.h" />
+    <ClInclude Include="game.h" />
+    <ClInclude Include="lane.h" />
+    <ClInclude Include="light.h" />
+    <ClInclude Include="people.h" />
+    <ClInclude Include="point.h" />
+    <ClInclude Include="snake.h" />
+    <ClInclude Include="truck.h" />
+    <ClInclude Include="vehicle.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

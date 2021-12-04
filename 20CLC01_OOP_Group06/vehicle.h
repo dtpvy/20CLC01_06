@@ -2,6 +2,7 @@
 #ifndef _vehicle_h
 #define _vehicle_h
 
+#include "people.h"
 #define WIDTH 115
 #define HEIGHT 36
 #include "point.h"
@@ -14,6 +15,7 @@ public:
 	virtual void draw() = 0;
 	virtual void deleteChar() = 0;
 	virtual void run() = 0;
+	virtual bool checkCrash(people p) = 0;
 };
 
 

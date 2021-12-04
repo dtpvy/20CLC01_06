@@ -24,6 +24,8 @@ class game
 private:
 	people player;
 	int score;
+	int lv;
+	int lvMax;
 	vector<lane> laneArr;
 public:
 	game();
@@ -39,6 +41,7 @@ public:
 	void drawDie();
 	int speedGame(int y);
 	int getLane();
+	people getPeople();
 	void Delete();
 	bool isRunning();
 	void resetGame();
@@ -50,6 +53,7 @@ public:
 	void pauseGame(HANDLE t);
 	void resumeGame(HANDLE t);
 	void updateLane();
+	bool checkLane();
 };
 
 #endif // !_game_h

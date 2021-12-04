@@ -12,6 +12,8 @@ public:
 	point(int x, int y);
 	int getX();
 	int getY();
+	void setX(int x);
+	void setY(int y);
 	void moveXY(int x, int y);
 	void writeFile(fstream& fo);
 	void readFile(fstream& fi);

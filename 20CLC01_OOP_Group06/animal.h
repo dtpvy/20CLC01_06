@@ -3,6 +3,7 @@
 #define _animal_h
 #include "point.h"
 
+#include "people.h"
 class animal : public point
 {
 public:
@@ -10,7 +11,8 @@ public:
 	animal(int x, int y);
 	virtual void draw() = 0;
 	virtual void deleteChar() = 0;
-	virtual bool checkCrash() = 0;
+	virtual bool checkCrash(people p) = 0;
+	virtual void move() = 0;
 };
 
 

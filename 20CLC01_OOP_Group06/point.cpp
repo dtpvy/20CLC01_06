@@ -21,6 +21,16 @@ int point::getY()
 	return this->y;
 }
 
+void point::setX(int x)
+{
+	this->x = x;
+}
+
+void point::setY(int y)
+{
+	this->y = y;
+}
+
 void point::moveXY(int x, int y)
 {
 	this->x = x;

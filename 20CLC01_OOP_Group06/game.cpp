@@ -2,7 +2,7 @@
 
 void game::drawGame()
 {
-	player.draw();
+	player.draw(13, 13);
 	for (int i = 0; i < laneArr.size(); i++)
 	{
 		laneArr[i].drawRoad();
@@ -191,6 +191,32 @@ void game::updatePosPeople(int c)
 	}
 }
 
+void game::lvUp()
+{
+	peoPle.deleteChar();
+	for (int i = 0; i < m_level; i++)
+	{
+		bird[i].deleteChar();
+		diNausor[i].deleteChar();
+		truck[i].deleteChar();
+		car[i].deleteChar();
+	}
+	delete[] car;
+	delete[] bird;
+	delete[] truck;
+	delete[] diNausor;
+	if (m_level == LV_MAX)
+	{
+		gotoXY(2, HEIGHT + 2);
+		cout << "You win";
+		_getch();
+		exit(0);
+	}
+	m_level++;
+	peoPle.reSet();
+	this->createGame(m_level);
+}
+
 void game::startGame()
 {
 	system("cls");
@@ -200,13 +226,12 @@ void game::startGame()
 
 void game::loadGame()
 {
-	ifstream infile;
 	string file;
 	cout << "Nhap ten duong dan file" << endl;
 	getline(cin, file);
 	clrscr();
-	infile.open(file, ios::in);
-	if (infile.fail())
+	fstream fi(file, ios::in);
+	if (fi.fail())
 	{
 		TextColor(ColorCode_Green);
 		cout << "DU LIEU KHONG TON TAI, BAT DAU TRO CHOI." << endl;
@@ -217,39 +242,55 @@ void game::loadGame()
 	}
 	laneArr.clear();
 	int n;
-	infile >> this->score >> n;
+	fi >> this->score >> this->lv >> this->lvMax >> n;
 	for (int i = 0; i < n; i++)
 	{
 		int type;
-		int light;
-		int m;
-		infile >> type >> light >> m;
-		lane tmp(type, light);
-		for (int j = 0; j < m; j++)
+		bool _light;
+		light tLight;
+		fi >> type >> _light;
+		lane tmp;
+		if (_light)
 		{
-			
+			int x, y;
+			fi >> x >> y;
+			tLight.setX(x);
+			tLight.setY(y);
+			tmp.set(type, _light, tLight);
+		}
+		else
+		{
+			tmp.set(type, _light);
+		}
+
+		int num;
+		fi >> num;
+		for (int j = 0; j < num; j++)
+		{
+			int x, y;
+			fi >> x >> y;
+			tmp.add(type, x, y);
 		}	
 		laneArr.push_back(tmp);
 	}
-	infile.close();
+	fi.close();
 }
 
 void game::saveGame()
 {
-	fstream fo;
 	TextColor(ColorCode_Green);
-	ofstream outfile;
 	string file;
 	cout << "Nhap ten file Can Luu" << endl;
 	getline(cin, file);
-	outfile.open(file);
+	fstream fo(file, ios::out);
 	TextColor(7);
-	outfile << score << " " << this->getLane();
+	fo << this->score << " " << this->lv << " " << this->lvMax << " " << this->getLane() << endl;
 	for (int i = 0; i < laneArr.size(); i++)
 	{
-		laneArr[i].writeFile();
+		laneArr[i].writeFile(fo);
+		fo << endl;
 	}
-	outfile.close();
+	fo.close();
 	clrscr();
 	this->startGame();
 	return;
@@ -273,6 +314,11 @@ void game::updateLane()
 	}
 }
 
+bool game::checkLane()
+{
+	laneArr[this->player.getY()].checkLane(player);
+}
+
 void game::drawDie()
 {
 	char s[] = "YOU ARE DIE!";
@@ -288,6 +334,11 @@ int game::speedGame(int y)
 int game::getLane()
 {
 	return this->laneArr.size();
+}
+
+people game::getPeople()
+{
+	return this->player;
 }
 
 bool game::isRunning()
