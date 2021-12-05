@@ -11,7 +11,7 @@ public:
 	car(int x, int y);
 	void draw();
 	void deleteChar();
-	void run();
+	void run(int velocity);
 };
 
 

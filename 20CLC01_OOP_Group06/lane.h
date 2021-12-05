@@ -26,6 +26,7 @@ private:
 	vector<animal*> animalArr;
 	light tLight;
 	bool _light;
+	int velocity;
 public:
 	lane();
 	void createLane(int type, bool _light, int num, int y);

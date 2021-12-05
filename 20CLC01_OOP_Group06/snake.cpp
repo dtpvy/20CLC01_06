@@ -48,3 +48,9 @@ void snake::deleteChar() {
 	gotoXY(m_x - 3, m_y);
 	cout << " ";
 }
+
+void snake::move(int velocity)
+{
+	int x = (this->getX() + velocity + 5 * 1029) % 1029;
+	int y = this->getY();
+}

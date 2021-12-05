@@ -10,7 +10,7 @@ public:
 	truck(int x, int y);
 	void draw();
 	void deleteChar();
-	void run();
+	void run(int velocity);
 };
 
 #endif // !TRUCK_H_

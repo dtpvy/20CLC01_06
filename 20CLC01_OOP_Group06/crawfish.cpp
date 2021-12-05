@@ -99,3 +99,9 @@ void crawfish::deleteChar() {
 	gotoXY(m_x - 3, m_y + 2);
 	cout << " ";
 }
+
+void crawfish::move(int velocity)
+{
+	int x = (this->getX() + velocity + 5 * 1029) % 1029;
+	int y = this->getY();
+}

@@ -40,9 +40,9 @@ void truck::deleteChar()
 	cout << "                 ";
 }
 
-void truck::run()
+void truck::run(int velocity)
 {
-	int x = this->getX() - 1;
+	int x = (this->getX() + velocity + 5 * 1029) % 1029;
 	int y = this->getY();
 
 	if (x - 6 <= 0)

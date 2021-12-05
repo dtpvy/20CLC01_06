@@ -39,9 +39,9 @@ void car::deleteChar()
     cout << "                 ";
 }
 
-void car::run()
+void car::run(int velocity)
 {
-    int x = this->getX() + 1;
+    int x = (this->getX() + velocity + 5 * 1029) % 1029;
     int y = this->getY();
    
     if (x+ 17 >= WIDTH)

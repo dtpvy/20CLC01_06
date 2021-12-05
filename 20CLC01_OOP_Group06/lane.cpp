@@ -1,8 +1,10 @@
 #include "lane.h"
 
+
 lane::lane()
 {
-	
+	srand((unsigned int)time(NULL));
+	this->velocity = rand() % 5;
 }
 
 void lane::createLane(int type, bool _light, int num, int y)
@@ -39,12 +41,12 @@ void lane::updateLane()
 	for (int i = 0; i < vehicleArr.size(); i++)
 	{
 		vehicleArr[i]->deleteChar();
-		vehicleArr[i]->run();
+		vehicleArr[i]->run(velocity);
 	}
 	for (int i = 0; i < animalArr.size(); i++)
 	{
 		animalArr[i]->deleteChar();
-		animalArr[i]->move();
+		animalArr[i]->move(velocity);
 	}
 }
 
@@ -144,17 +146,105 @@ animal* lane::createAnimal(int type, int x, int y)
 	case 4:
 	{
 		tmp = new snake;
-		break
+		break;
 	}
 	case 5:
 	{
 		tmp = new crawfish;
-		break
+		break;
 	}
 	}
 	tmp->setX(x);
 	tmp->setY(x);
 }
+
+
+void lane::draw()
+{
+	if (!tLight.getStatus()) // red light
+	{
+		this->updateLightTraffic();
+		return;
+	}
+	this->updateLane();
+	for (int i = 0; i < vehicleArr.size(); i++)
+	{
+		vehicleArr[i]->draw();
+	}
+	for (int j = 0; j < animalArr.size(); j++)
+	{
+		animalArr[j]->draw();
+	}
+	if (!vehicleArr.empty())
+	{
+		int Y = vehicleArr[0]->getY();
+		TextColor(14);
+		for (int i = 0; i < 5; i++)
+		{
+			gotoXY(0, Y + i);
+			cout << "     " << (char)186 << "  ";
+			gotoXY(1029, Y + i);
+			cout << "  " << (char)186 << "     ";
+		}
+		tLight.draw(518, Y + 4);
+	}
+	if (!animalArr.empty())
+	{
+		TextColor(14);
+		for (int i = 0; i < 2; i++)
+		{
+			gotoXY(0, animalArr[0]->getY() + i);
+			cout << "     " << (char)186 << "  ";
+			gotoXY(1029, animalArr[0]->getY() + i);
+			cout << "  " << (char)186 << "     ";
+		}
+	}
+
+}
+
+void lane::deleteChar()
+{
+	for (int i = 0; i < vehicleArr.size(); i++)
+	{
+		vehicleArr[i]->deleteChar();
+	}
+	for (int i = 0; i < animalArr.size(); i++)
+	{
+		animalArr[i]->deleteChar();
+	}
+}
+
+void lane::reset()
+{
+	int coor_Y;
+	if (this->type && !vehicleArr.empty())
+	{
+		coor_Y = vehicleArr[0]->getY();
+		vehicleArr.clear();
+		createLane(this->type, this->_light, 4, coor_Y);
+		tLight.set(true, 65);
+	}
+	else
+	{
+		coor_Y = animalArr[0]->getY();
+		animalArr.clear();
+		createLane(this->type, 4, coor_Y);
+		tLight.set(true, 65);
+	}
+}
+
+void lane::add(int type, int x, int y)
+{
+	if (this->type) // vehicles
+	{
+		vehicleArr.push_back(createVehicle(type, x, y));
+	}
+	else
+	{
+		animalArr.push_back(createAnimal(type, x, y));
+	}
+}
+
 
 //void lane::TransitionTo(Map* state)
 //{

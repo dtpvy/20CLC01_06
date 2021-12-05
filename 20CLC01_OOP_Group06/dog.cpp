@@ -75,3 +75,9 @@ void dog::deleteChar() {
 	gotoXY(m_x - 3, m_y + 1);
 	cout << " ";
 }
+
+void dog::move(int velocity)
+{
+	int x = (this->getX() + velocity + 5 * 1029) % 1029;
+	int y = this->getY();
+}
