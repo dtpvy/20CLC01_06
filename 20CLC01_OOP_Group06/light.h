@@ -2,6 +2,7 @@
 #ifndef _light_h
 #define _light_h
 #include "point.h"
+#include "console.h"
 #define greenLight 10
 #define redLight 10
 
@@ -17,7 +18,10 @@ public:
 	void set(bool status, int time);
 	void changeStatus();
 	void updateTime();
-	void draw();
+	void draw(int X, int Y);
+	void writeFile(fstream& fo);
+	void setX(int x);
+	void setY(int y);
 };
 
 

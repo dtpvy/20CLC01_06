@@ -10,6 +10,7 @@ public:
 	dog(int x, int y);
 	void draw();
 	void deleteChar();
+	void move(int velocity);
 };
 
 #endif // !_dog_h

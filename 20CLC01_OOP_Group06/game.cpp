@@ -253,10 +253,10 @@ void game::loadGame()
 	fi >> this->score >> this->lv >> this->lvMax >> n;
 	for (int i = 0; i < n; i++)
 	{
-		int type;
+		int type, velocity;
 		bool _light;
 		light tLight;
-		fi >> type >> _light;
+		fi >> type >> _light >> velocity;
 		lane tmp;
 		if (_light)
 		{
@@ -264,11 +264,11 @@ void game::loadGame()
 			fi >> x >> y;
 			tLight.setX(x);
 			tLight.setY(y);
-			tmp.set(type, _light, tLight);
+			tmp.set(type, _light, tLight, velocity);
 		}
 		else
 		{
-			tmp.set(type, _light);
+			tmp.set(type, _light, velocity);
 		}
 
 		int num;
