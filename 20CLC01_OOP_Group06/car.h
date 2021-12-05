@@ -8,10 +8,21 @@ class car : public vehicle
 {
 public:
 	car();
-	car(int x, int y);
+	car(int x, int y,bool direction);
+
+	void drawForward();
+	void drawBackward();
 	void draw();
+
+	void deleteCharForward();
+	void deleteCharBackward();
 	void deleteChar();
-	void run();
+
+	bool checkCrashForward(const people& p);
+	bool checkCrashBackward(const people& p);
+	bool checkCrash(const people& p);
+
+	void move();
 };
 
 
