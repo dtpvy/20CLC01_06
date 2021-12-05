@@ -7,10 +7,21 @@ class truck:public vehicle
 {
 public:
 	truck();
-	truck(int x, int y);
+	truck(int x, int y,bool direction);
+
+	void drawForward();
+	void drawBackward();
 	void draw();
+
+	bool checkCrashForward(people p);
+	bool checkCrashBackward(people p);
+	bool checkCrash(people p);
+
+	void deleteCharForward();
+	void deleteCharBackward();
 	void deleteChar();
-	void run(int velocity);
+
+	void move();
 };
 
 #endif // !TRUCK_H_

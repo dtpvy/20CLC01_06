@@ -7,7 +7,7 @@ class snake : public animal
 public:
 	snake();
 	snake(int x, int y);
-	void draw(int velocity);
+	void draw();
 	void deleteChar();
 	void move(int velocity);
 };

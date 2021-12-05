@@ -8,45 +8,179 @@ using namespace std;
 
 truck::truck() {}
 
-truck::truck(int x,int y):vehicle(x,y){}
+truck::truck(int x,int y,bool direction):vehicle(x,y,direction){}
 
-void truck::draw()
+void truck::drawBackward()
 {
 	TextColor(4);
 	gotoXY(this->getX(), this->getY());
-	cout << "____________";
-	gotoXY(this->getX() - 5, this->getY() + 1);
-	cout << " ____|           |";
-	gotoXY(this->getX() - 5, this->getY() + 2);
-	cout << "//__||----OOP----|";
-	gotoXY(this->getX() - 6, this->getY() + 3);
+	cout << "       ___________";
+	gotoXY(this->getX(), this->getY() + 1);
+	cout << "  ____|           |";
+	gotoXY(this->getX(), this->getY() + 2);
+	cout << " //__||----OOP----|";
+	gotoXY(this->getX(), this->getY() + 3);
 	cout << "|_____|___________|";
-	gotoXY(this->getX() - 5, this->getY() + 4);
-	cout << " `(+)........(+)`";
+	gotoXY(this->getX(), this->getY() + 4);
+	cout << " `(+).........(+)`";
+	TextColor(7);
+}
+
+void truck::drawForward()
+{
+	TextColor(4);
+	gotoXY(this->getX(), this->getY());
+	cout << " ___________";
+	gotoXY(this->getX(), this->getY() + 1);
+	cout << "|           |____";
+	gotoXY(this->getX(), this->getY() + 2);
+	cout << "|----OOP----||__\\\\";
+	gotoXY(this->getX(), this->getY() + 3);
+	cout << "|___________|_____|";
+	gotoXY(this->getX(), this->getY() + 4);
+	cout << " `(+).........(+)`";
+	TextColor(7);
+}
+
+void truck::draw()
+{
+	if (direction)
+		drawForward();
+	else
+		drawBackward();
+}
+
+void truck::deleteCharBackward()
+{
+	gotoXY(this->getX(), this->getY());
+	cout << "                  ";
+	gotoXY(this->getX(), this->getY() + 1);
+	cout << "                   ";
+	gotoXY(this->getX(), this->getY() + 2);
+	cout << "                   ";
+	gotoXY(this->getX(), this->getY() + 3);
+	cout << "                   ";
+	gotoXY(this->getX(), this->getY() + 4);
+	cout << "                  ";
+}
+
+void truck::deleteCharForward()
+{
+	TextColor(4);
+	gotoXY(this->getX(), this->getY());
+	cout << "            ";
+	gotoXY(this->getX(), this->getY() + 1);
+	cout << "                 ";
+	gotoXY(this->getX(), this->getY() + 2);
+	cout << "                  ";
+	gotoXY(this->getX(), this->getY() + 3);
+	cout << "                   ";
+	gotoXY(this->getX(), this->getY() + 4);
+	cout << "                  ";
 	TextColor(7);
 }
 
 void truck::deleteChar()
 {
-	gotoXY(this->getX(), this->getY());
-	cout << "            ";
-	gotoXY(this->getX() - 5, this->getY() + 1);
-	cout << "                    ";
-	gotoXY(this->getX() - 5, this->getY() + 2);
-	cout << "                  ";
-	gotoXY(this->getX() - 6, this->getY() + 3);
-	cout << "                   ";
-	gotoXY(this->getX() - 5, this->getY() + 4);
-	cout << "                 ";
+	if (direction)
+		deleteCharForward();
+	else
+		deleteCharBackward();
 }
 
-void truck::run(int velocity)
+bool truck::checkCrashForward(people p)
 {
-	int x = (this->getX() + velocity + 5 * 1029) % 1029;
+	for (int i = 1; i <= 11; i++)
+		if (this->getX() + i == p.getX() && (this->getY() == p.getY() || this->getY() == p.getY() + 1))
+			return true;
+
+	if (this->getY() + 1 == p.getY() || this->getY() + 1 == p.getY() + 1)
+	{
+		if (this->getX() == p.getX())
+			return true;
+
+		for (int i = 12; i <= 15; i++)
+			if (this->getX() + i == p.getX())
+				return true;
+	}
+
+	if (this->getY() + 2 == p.getY() || this->getY() + 2 == p.getY() + 1)
+	{
+		if (this->getX() == p.getX() || this->getX() + 17 == p.getX())
+			return true;
+	}
+
+	if (this->getY() + 3 == p.getY() || this->getY() + 3 == p.getY() + 1)
+	{
+		if (this->getX() == p.getX() || this->getX() + 18 == p.getX())
+			return true;
+	}
+
+	for (int i = 1; i <= 17; i++)
+		if (this->getX() + i == p.getX() && (this->getY() + 4 == p.getY() || this->getY() + 4 == p.getY() + 1))
+			return true;
+
+	return false;
+}
+bool truck::checkCrashBackward(people p)
+{
+	for (int i = 7; i <= 17; i++)
+		if (this->getX() + i == p.getX() && (this->getY() == p.getY() || this->getY() == p.getY() + 1))
+			return true;
+
+	if (this->getY() + 1 == p.getY() || this->getY() + 1 == p.getY() + 1)
+	{
+		for (int i = 2; i <= 5; i++)
+			if (this->getX() + i == p.getX())
+				return true;
+
+		if (this->getX() + 18 == p.getX())
+			return true;
+	}
+
+	if (this->getY() + 2 == p.getY() || this->getY() + 2 == p.getY() + 1)
+	{
+		if (this->getX() + 1 == p.getX() || this->getX() + 18 == p.getX())
+			return true;
+	}
+
+	if (this->getY() + 3 == p.getY() || this->getY() + 3 == p.getY() + 1)
+	{
+		if (this->getX() == p.getX() || this->getX() + 18 == p.getX())
+			return true;
+	}
+
+	for (int i = 1; i <= 17; i++)
+		if (this->getX() + i == p.getX() && (this->getY() + 4 == p.getY() || this->getY() + 4 == p.getY() + 1))
+			return true;
+
+	return false;
+}
+
+bool truck::checkCrash(people p)
+{
+	if (direction)
+		return checkCrashForward(p);
+	else
+		return checkCrashBackward(p);
+}
+void truck::move()
+{
+	int x = this->getX();
 	int y = this->getY();
 
-	if (x - 6 <= 0)
-		x = WIDTH - 12;
+	if (direction)
+	{
+		++x;
+		if (this->getX() + 18 >= WIDTH)
+			x = 0;
+	}
+	else
+	{
+		--x;
+		if (this->getX() <= 0)
+			x = WIDTH - 18;
+	}
 
 	this->moveXY(x, y);
 }
