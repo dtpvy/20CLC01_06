@@ -5,9 +5,9 @@
 #include "car.h"
 #include "console.h"
 
-static const int bLEFT = 0;
+static const int bLEFT = 7;
 static const int bTOP = 1;
-static const int bRIGHT = 1023; // so minh hoa, chinh sua sau
+static const int bRIGHT = 1029; // so minh hoa, chinh sua sau
 static const int bBOTTOM = 549; // so minh hoa, chinh sua sau
 static const int LIFE = 3;
 
@@ -16,6 +16,7 @@ class people: public point
 private:
 	bool m_State;
 	int X, Y;
+	int old_X, old_Y;
 	int remain;
 public:
 	people();
@@ -27,7 +28,7 @@ public:
 	void goDown();
 	bool isFinish();
 	bool isDead();
-	void draw(int Hcolor, int Bcolor);     
+	void draw();     
 	void deleteChar();
 };
 

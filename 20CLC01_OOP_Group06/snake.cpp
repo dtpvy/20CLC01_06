@@ -14,7 +14,7 @@ void snake::draw() {
 	gotoXY(m_x + 2, m_y - 1);
 	cout << char(220);
 	gotoXY(m_x + 3, m_y);
-	cout << char(219)
+	cout << char(219);
 	gotoXY(m_x + 2, m_y);
 	cout << char(220);
 	gotoXY(m_x + 1, m_y);
