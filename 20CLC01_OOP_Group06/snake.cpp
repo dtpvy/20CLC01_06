@@ -8,44 +8,44 @@ snake::snake():animal() {}
 
 snake::snake(int x,int y){}
 
-void snake::draw() {
-	gotoXY(m_x + 3, m_y - 1);
+void snake::draw(int velocity) {
+	gotoXY(this->getX() + 3, this->getY() - 1);
 	cout << char(220);
-	gotoXY(m_x + 2, m_y - 1);
+	gotoXY(this->getX() + 2, this->getY() - 1);
 	cout << char(220);
-	gotoXY(m_x + 3, m_y);
-	cout << char(219)
-	gotoXY(m_x + 2, m_y);
+	gotoXY(this->getX() + 3, this->getY());
+	cout << char(219);
+	gotoXY(this->getX() + 2, this->getY());
 	cout << char(220);
-	gotoXY(m_x + 1, m_y);
+	gotoXY(this->getX() + 1, this->getY());
 	cout << char(220);
-	gotoXY(m_x, m_y);
+	gotoXY(this->getX(), this->getY());
 	cout << char(220);
-	gotoXY(m_x - 1, m_y);
+	gotoXY(this->getX() - 1, this->getY());
 	cout << char(220);
-	gotoXY(m_x - 2, m_y);
+	gotoXY(this->getX() - 2, this->getY());
 	cout << char(220);
-	gotoXY(m_x - 3, m_y);
+	gotoXY(this->getX() - 3, this->getY());
 	cout << char(220);
 }
 void snake::deleteChar() {
-	gotoXY(m_x + 3, m_y - 1);
+	gotoXY(this->getX() + 3, this->getY() - 1);
 	cout << " ";
-	gotoXY(m_x + 2, m_y - 1);
+	gotoXY(this->getX() + 2, this->getY() - 1);
 	cout << " ";
-	gotoXY(m_x + 3, m_y);
+	gotoXY(this->getX() + 3, this->getY());
 	cout << " ";
-	gotoXY(m_x + 2, m_y);
+	gotoXY(this->getX() + 2, this->getY());
 	cout << " ";
-	gotoXY(m_x + 1, m_y);
+	gotoXY(this->getX() + 1, this->getY());
 	cout << " ";
-	gotoXY(m_x, m_y);
+	gotoXY(this->getX(), this->getY());
 	cout << " ";
-	gotoXY(m_x - 1, m_y);
+	gotoXY(this->getX() - 1, this->getY());
 	cout << " ";
-	gotoXY(m_x - 2, m_y);
+	gotoXY(this->getX() - 2, this->getY());
 	cout << " ";
-	gotoXY(m_x - 3, m_y);
+	gotoXY(this->getX() - 3, this->getY());
 	cout << " ";
 }
 
