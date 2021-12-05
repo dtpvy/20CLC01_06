@@ -38,8 +38,8 @@ public:
 	bool checkLane(people p);
 	void reset();
 	void add(int type, int x, int y);
-	void set(int type, int _light, light tLight);
-	void set(int type, int _light);
+	void set(int type, int _light, light tLight, int _velocity);
+	void set(int type, int _light, int _velocity);
 	bool writeFile(fstream& fo);
 	vehicle* createVehicle(int type, int x, int y);
 	animal* createAnimal(int type, int x, int y);

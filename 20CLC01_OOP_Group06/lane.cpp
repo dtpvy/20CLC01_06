@@ -5,6 +5,10 @@ lane::lane()
 {
 	srand((unsigned int)time(NULL));
 	this->velocity = rand() % 5;
+	if (rand() % 2 == 0) // negative
+	{
+		this->velocity = -1 * this->velocity;
+	}
 }
 
 void lane::createLane(int type, bool _light, int num, int y)
@@ -83,7 +87,7 @@ bool lane::checkLane(people p)
 
 bool lane::writeFile(fstream& fo)
 {
-	fo << this->type << " " << this->_light;
+	fo << this->type << " " << this->_light << " " << this->velocity;
 	if (this->_light)
 	{
 		fo << " ";
@@ -109,7 +113,6 @@ bool lane::writeFile(fstream& fo)
 			fo << " ";
 		}
 	}
-
 }
 
 vehicle* lane::createVehicle(int type, int x, int y)
@@ -175,6 +178,13 @@ void lane::draw()
 	{
 		animalArr[j]->draw();
 	}
+	
+	if (_light)
+	{
+		tLight.draw(518, vehicleArr[0]->getY() + 4);
+		this->updateLightTraffic();
+	}
+
 	if (!vehicleArr.empty())
 	{
 		int Y = vehicleArr[0]->getY();
@@ -186,9 +196,8 @@ void lane::draw()
 			gotoXY(1029, Y + i);
 			cout << "  " << (char)186 << "     ";
 		}
-		tLight.draw(518, Y + 4);
 	}
-	if (!animalArr.empty())
+	else if (!animalArr.empty())
 	{
 		TextColor(14);
 		for (int i = 0; i < 2; i++)
@@ -217,25 +226,25 @@ void lane::deleteChar()
 void lane::reset()
 {
 	int coor_Y;
-	if (this->type && !vehicleArr.empty())
+	if ((this->type == 1 || this->type == 2) && !vehicleArr.empty())
 	{
 		coor_Y = vehicleArr[0]->getY();
 		vehicleArr.clear();
 		createLane(this->type, this->_light, 4, coor_Y);
-		tLight.set(true, 65);
+		if(this->_light)
+			tLight.set(true, 0);
 	}
 	else
 	{
 		coor_Y = animalArr[0]->getY();
 		animalArr.clear();
 		createLane(this->type, 4, coor_Y);
-		tLight.set(true, 65);
 	}
 }
 
 void lane::add(int type, int x, int y)
 {
-	if (this->type) // vehicles
+	if (type == 1 || type == 2) // vehicles
 	{
 		vehicleArr.push_back(createVehicle(type, x, y));
 	}
@@ -243,6 +252,21 @@ void lane::add(int type, int x, int y)
 	{
 		animalArr.push_back(createAnimal(type, x, y));
 	}
+}
+
+void lane::set(int type, int _light, light tLight, int _velocity)
+{
+	this->type = type;
+	this->_light = _light;
+	this->tLight = tLight;
+	this->velocity = _velocity;
+}
+
+void lane::set(int type, int light, int _velocity)
+{
+	this->type = type;
+	this->_light = light;
+	this->velocity = _velocity;
 }
 
 

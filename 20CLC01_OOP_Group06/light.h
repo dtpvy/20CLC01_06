@@ -19,6 +19,9 @@ public:
 	void changeStatus();
 	void updateTime();
 	void draw(int X, int Y);
+	void writeFile(fstream& fo);
+	void setX(int x);
+	void setY(int y);
 };
 
 

@@ -71,3 +71,18 @@ void light::draw(int X, int Y)
 		cout << (char)223;
 	}
 }
+
+void light::setX(int x)
+{
+	this->_status = x;
+}
+
+void light::setY(int y)
+{
+	this->_time = y;
+}
+
+void light::writeFile(fstream& fo)
+{
+	fo << this->_status << " " << this->_time;
+}
