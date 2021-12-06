@@ -1,8 +1,8 @@
 #include "animal.h"
 
-animal::animal() : point() {
+animal::animal() : direction() {
 
 }
-animal::animal(int x, int y) : point(x, y) {
+animal::animal(int x, int y, bool direc) : point(x, y), direction(direc) {
 
 }
