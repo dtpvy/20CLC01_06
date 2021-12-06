@@ -91,68 +91,145 @@ void truck::deleteChar()
 bool truck::checkCrashForward(people p)
 {
 	for (int i = 1; i <= 11; i++)
-		if (this->getX() + i == p.getX() && (this->getY() == p.getY() || this->getY() == p.getY() + 1))
+	{
+		if (this->getX() + i == p.getX() + 1 && (this->getY() == p.getY() || this->getY() == p.getY() + 2))
 			return true;
 
-	if (this->getY() + 1 == p.getY() || this->getY() + 1 == p.getY() + 1)
+		if ((this->getX() + i == p.getX() || this->getX() + i == p.getX() + 2) && (this->getY() == p.getY() + 1))
+			return true;
+	}
+
+	if (this->getY() + 1 == p.getY() || this->getY() + 1 == p.getY() + 2)
 	{
-		if (this->getX() == p.getX())
+		if (this->getX() == p.getX() + 1)
 			return true;
 
 		for (int i = 12; i <= 15; i++)
-			if (this->getX() + i == p.getX())
+			if (this->getX() + i == p.getX() + 1)
 				return true;
 	}
 
-	if (this->getY() + 2 == p.getY() || this->getY() + 2 == p.getY() + 1)
+	if (this->getY() + 1 == p.getY() + 1)
+	{
+		if (this->getX() == p.getX() || this->getX() == p.getX() + 2)
+			return true;
+
+		for (int i = 12; i <= 15; i++)
+			if (this->getX() + i == p.getX() || this->getX() + i == p.getX() + 2)
+				return true;
+	}
+
+	if (this->getY() + 2 == p.getY() || this->getY() + 2 == p.getY() + 2)
+	{
+		if (this->getX() == p.getX() + 1 || this->getX() + 17 == p.getX() + 1)
+			return true;
+	}
+
+	if (this->getY() + 2 == p.getY() + 1)
 	{
 		if (this->getX() == p.getX() || this->getX() + 17 == p.getX())
 			return true;
+
+		if (this->getX() == p.getX() + 2 || this->getX() + 17 == p.getX() + 2)
+			return true;
 	}
 
-	if (this->getY() + 3 == p.getY() || this->getY() + 3 == p.getY() + 1)
+	if (this->getY() + 3 == p.getY() || this->getY() + 3 == p.getY() + 2)
+	{
+		if (this->getX() == p.getX() + 1 || this->getX() + 18 == p.getX() + 1)
+			return true;
+	}
+
+	if (this->getY() + 3 == p.getY() + 1)
 	{
 		if (this->getX() == p.getX() || this->getX() + 18 == p.getX())
+			return true;
+
+		if (this->getX() == p.getX() + 2 || this->getX() + 18 == p.getX() + 2)
 			return true;
 	}
 
 	for (int i = 1; i <= 17; i++)
-		if (this->getX() + i == p.getX() && (this->getY() + 4 == p.getY() || this->getY() + 4 == p.getY() + 1))
+	{
+		if (this->getX() + i == p.getX() + 1 && (this->getY() + 4 == p.getY() || this->getY() + 4 == p.getY() + 2))
 			return true;
+
+		if ((this->getX() + i == p.getX() || this->getX() + i == p.getX() + 2) && (this->getY() + 4 == p.getY() + 1))
+			return true;
+	}
 
 	return false;
 }
+
 bool truck::checkCrashBackward(people p)
 {
 	for (int i = 7; i <= 17; i++)
-		if (this->getX() + i == p.getX() && (this->getY() == p.getY() || this->getY() == p.getY() + 1))
+	{
+		if (this->getX() + i == p.getX() + 1 && (this->getY() == p.getY() || this->getY() == p.getY() + 2))
 			return true;
 
-	if (this->getY() + 1 == p.getY() || this->getY() + 1 == p.getY() + 1)
-	{
-		for (int i = 2; i <= 5; i++)
-			if (this->getX() + i == p.getX())
-				return true;
-
-		if (this->getX() + 18 == p.getX())
+		if ((this->getX() + i == p.getX() || this->getX() + i == p.getX() + 2) && (this->getY() == p.getY() + 1))
 			return true;
 	}
 
-	if (this->getY() + 2 == p.getY() || this->getY() + 2 == p.getY() + 1)
+	if (this->getY() + 1 == p.getY() || this->getY() + 1 == p.getY() + 2)
+	{
+		for (int i = 2; i <= 5; i++)
+			if (this->getX() + i == p.getX() + 1)
+				return true;
+
+		if (this->getX() + 18 == p.getX() + 1)
+			return true;
+	}
+
+	if (this->getY() + 1 == p.getY() + 1)
+	{
+		for (int i = 2; i <= 5; i++)
+			if (this->getX() + i == p.getX() || this->getX() + i == p.getX() + 2)
+				return true;
+
+		if (this->getX() + 18 == p.getX() || this->getX() + 18 == p.getX() + 2)
+			return true;
+	}
+
+	if (this->getY() + 2 == p.getY() || this->getY() + 2 == p.getY() + 2)
+	{
+		if (this->getX() + 1 == p.getX() + 1 || this->getX() + 18 == p.getX() + 1)
+			return true;
+	}
+
+	if (this->getY() + 2 == p.getY() + 1)
 	{
 		if (this->getX() + 1 == p.getX() || this->getX() + 18 == p.getX())
 			return true;
+
+		if (this->getX() + 1 == p.getX() + 2 || this->getX() + 18 == p.getX() + 2)
+			return true;
 	}
 
-	if (this->getY() + 3 == p.getY() || this->getY() + 3 == p.getY() + 1)
+	if (this->getY() + 3 == p.getY() || this->getY() + 3 == p.getY() + 2)
+	{
+		if (this->getX() == p.getX() + 1 || this->getX() + 18 == p.getX() + 1)
+			return true;
+	}
+
+	if (this->getY() + 3 == p.getY() + 1)
 	{
 		if (this->getX() == p.getX() || this->getX() + 18 == p.getX())
+			return true;
+
+		if (this->getX() == p.getX() + 2 || this->getX() + 18 == p.getX() + 2)
 			return true;
 	}
 
 	for (int i = 1; i <= 17; i++)
-		if (this->getX() + i == p.getX() && (this->getY() + 4 == p.getY() || this->getY() + 4 == p.getY() + 1))
+	{
+		if (this->getX() + i == p.getX() + 1 && (this->getY() + 4 == p.getY() || this->getY() + 4 == p.getY() + 2))
 			return true;
+
+		if ((this->getX() + i == p.getX() || this->getX() + i == p.getX() + 2) && (this->getY() + 4 == p.getY() + 1))
+			return true;
+	}
 
 	return false;
 }
