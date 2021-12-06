@@ -7,10 +7,21 @@ class dog : public animal
 {
 public:
 	dog();
-	dog(int x, int y);
+	dog(int x, int y, bool direc);
+
+	void drawForward();
+	void drawBackward();
 	void draw();
+
+	bool checkCrashForward(people p);
+	bool checkCrashBackward(people p);
+	bool checkCrash(people p);
+
+	void deleteCharForward();
+	void deleteCharBackward();
 	void deleteChar();
-	void move(int velocity);
+
+	void move();
 };
 
 #endif // !_dog_h
