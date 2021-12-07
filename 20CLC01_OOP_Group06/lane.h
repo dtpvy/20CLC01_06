@@ -26,7 +26,7 @@ private:
 	vector<animal*> animalArr;
 	light tLight;
 	bool _light;
-	int velocity;
+	bool direction;
 public:
 	lane();
 	void createLane(int type, bool _light, int num, int y);
@@ -38,8 +38,8 @@ public:
 	bool checkLane(people p);
 	void reset();
 	void add(int type, int x, int y);
-	void set(int type, int _light, light tLight, int _velocity);
-	void set(int type, int _light, int _velocity);
+	void set(int type, int _light, light tLight, int _direction);
+	void set(int type, int _light, int _direction);
 	bool writeFile(fstream& fo);
 	vehicle* createVehicle(int type, int x, int y);
 	animal* createAnimal(int type, int x, int y);

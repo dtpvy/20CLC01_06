@@ -2,7 +2,7 @@
 
 void game::drawGame()
 {
-	player.draw(13, 13);
+	player.draw();
 	for (int i = 0; i < laneArr.size(); i++)
 	{
 		laneArr[i].draw();
@@ -253,22 +253,23 @@ void game::loadGame()
 	fi >> this->score >> this->lv >> this->lvMax >> n;
 	for (int i = 0; i < n; i++)
 	{
-		int type, velocity;
+		int type, direction;
 		bool _light;
 		light tLight;
-		fi >> type >> _light >> velocity;
+		fi >> type >> _light >> direction;
 		lane tmp;
 		if (_light)
 		{
-			int x, y;
-			fi >> x >> y;
+			int status, _time, x, y;
+			fi >> status >> _time >> x >> y;
+			tLight.set(status, _time);
 			tLight.setX(x);
 			tLight.setY(y);
-			tmp.set(type, _light, tLight, velocity);
+			tmp.set(type, _light, tLight, direction);
 		}
 		else
 		{
-			tmp.set(type, _light, velocity);
+			tmp.set(type, _light, direction);
 		}
 
 		int num;

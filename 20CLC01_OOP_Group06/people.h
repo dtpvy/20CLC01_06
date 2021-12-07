@@ -7,8 +7,8 @@
 
 static const int bLEFT = 7;
 static const int bTOP = 1;
-static const int bRIGHT = 1029; // so minh hoa, chinh sua sau
-static const int bBOTTOM = 549; // so minh hoa, chinh sua sau
+static const int bRIGHT = 108; 
+static const int bBOTTOM = 33; 
 static const int LIFE = 3;
 
 class people: public point
@@ -20,7 +20,7 @@ private:
 	int remain;
 public:
 	people();
-	people(int, int);
+	//people(int,int)
 	void reset();
 	void goUp();
 	void goLeft();

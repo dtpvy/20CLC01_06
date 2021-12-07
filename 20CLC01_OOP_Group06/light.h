@@ -11,6 +11,7 @@ class light: public point
 private:
 	bool _status;
 	int _time;
+	int X, Y;
 public:
 	light();
 	bool getStatus();
@@ -18,7 +19,7 @@ public:
 	void set(bool status, int time);
 	void changeStatus();
 	void updateTime();
-	void draw(int X, int Y);
+	void draw();
 	void writeFile(fstream& fo);
 	void setX(int x);
 	void setY(int y);

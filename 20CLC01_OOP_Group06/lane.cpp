@@ -4,10 +4,10 @@
 lane::lane()
 {
 	srand((unsigned int)time(NULL));
-	this->velocity = rand() % 5;
+	this->direction = rand()*5 % 2;
 	if (rand() % 2 == 0) // negative
 	{
-		this->velocity = -1 * this->velocity;
+		this->direction = -1 * this->direction;
 	}
 }
 
@@ -19,6 +19,7 @@ void lane::createLane(int type, bool _light, int num, int y)
 	if (_light == true)
 	{
 		tLight.setX(rand() % (WIDHT / 2) + WIDHT / 2);
+		tLight.setY(y);
 	}
 	int x = 0;
 	for (int i = 0; i < num; i++)
@@ -41,16 +42,18 @@ void lane::createLane(int type, int num, int y)
 
 void lane::updateLane()
 {
-	if (_light && !tLight.getStatus()) return;
-	for (int i = 0; i < vehicleArr.size(); i++)
+	if (_light && tLight.getStatus()) // green light
 	{
-		vehicleArr[i]->deleteChar();
-		vehicleArr[i]->run(velocity);
+		for (int i = 0; i < vehicleArr.size(); i++)
+		{
+			vehicleArr[i]->deleteChar();
+			vehicleArr[i]->move();
+		}
 	}
 	for (int i = 0; i < animalArr.size(); i++)
 	{
 		animalArr[i]->deleteChar();
-		animalArr[i]->move(velocity);
+		animalArr[i]->move();
 	}
 }
 
@@ -87,7 +90,7 @@ bool lane::checkLane(people p)
 
 bool lane::writeFile(fstream& fo)
 {
-	fo << this->type << " " << this->_light << " " << this->velocity;
+	fo << this->type << " " << this->_light << " " << this->direction;
 	if (this->_light)
 	{
 		fo << " ";
@@ -122,17 +125,15 @@ vehicle* lane::createVehicle(int type, int x, int y)
 	{
 	case 1:
 	{
-		tmp = new car;
+		tmp = new car(x, y, this->direction);
 		break;
 	}
 	case 2:
 	{
-		tmp = new truck;
+		tmp = new truck(x, y, this->direction);
 		break;
 	}
 	}
-	tmp->setX(x);
-	tmp->setY(x);
 }
 
 
@@ -143,32 +144,25 @@ animal* lane::createAnimal(int type, int x, int y)
 	{
 	case 3:
 	{
-		tmp = new dog;
+		tmp = new dog(x, y, this->direction);
 		break;
 	}
 	case 4:
 	{
-		tmp = new snake;
+		tmp = new snake(x, y, this->direction);
 		break;
 	}
 	case 5:
 	{
-		tmp = new crawfish;
+		tmp = new crawfish(x, y, this->direction);
 		break;
 	}
 	}
-	tmp->setX(x);
-	tmp->setY(x);
 }
 
 
 void lane::draw()
 {
-	if (!tLight.getStatus()) // red light
-	{
-		this->updateLightTraffic();
-		return;
-	}
 	this->updateLane();
 	for (int i = 0; i < vehicleArr.size(); i++)
 	{
@@ -180,10 +174,7 @@ void lane::draw()
 	}
 	
 	if (_light)
-	{
-		tLight.draw(518, vehicleArr[0]->getY() + 4);
-		this->updateLightTraffic();
-	}
+		tLight.draw();
 
 	if (!vehicleArr.empty())
 	{
@@ -193,7 +184,7 @@ void lane::draw()
 		{
 			gotoXY(0, Y + i);
 			cout << "     " << (char)186 << "  ";
-			gotoXY(1029, Y + i);
+			gotoXY(WIDTH - 7, Y + i);
 			cout << "  " << (char)186 << "     ";
 		}
 	}
@@ -204,7 +195,7 @@ void lane::draw()
 		{
 			gotoXY(0, animalArr[0]->getY() + i);
 			cout << "     " << (char)186 << "  ";
-			gotoXY(1029, animalArr[0]->getY() + i);
+			gotoXY(WIDTH - 7, animalArr[0]->getY() + i);
 			cout << "  " << (char)186 << "     ";
 		}
 	}
@@ -254,19 +245,19 @@ void lane::add(int type, int x, int y)
 	}
 }
 
-void lane::set(int type, int _light, light tLight, int _velocity)
+void lane::set(int type, int _light, light tLight, int _direction)
 {
 	this->type = type;
 	this->_light = _light;
 	this->tLight = tLight;
-	this->velocity = _velocity;
+	this->direction = _direction;
 }
 
-void lane::set(int type, int light, int _velocity)
+void lane::set(int type, int light, int _direction)
 {
 	this->type = type;
 	this->_light = light;
-	this->velocity = _velocity;
+	this->direction = _direction;
 }
 
 

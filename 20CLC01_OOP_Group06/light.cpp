@@ -50,7 +50,7 @@ void light::updateTime()
 }
 
 
-void light::draw(int X, int Y)
+void light::draw()
 {
 	if (this->_status) // green light
 	{
@@ -84,5 +84,5 @@ void light::setY(int y)
 
 void light::writeFile(fstream& fo)
 {
-	fo << this->_status << " " << this->_time;
+	fo << this->_status << " " << this->_time << " " << this->X << " " << this->Y;
 }
