@@ -250,6 +250,7 @@ bool crawfish::move()
 	}
 	else {
 		if (this->getX() <= 0) return false;
+		--x;
 	}
 	this->moveXY(x, y);
 	return true;
