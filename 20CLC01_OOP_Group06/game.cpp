@@ -1,87 +1,108 @@
 #include "game.h"
 
+game::game()
+{
+	this->score = 0;
+	this->lv = 0;
+	this->lvMax = 0;
+	this->player.reset();
+}
+
+game::~game()
+{
+	laneArr.clear();
+}
+
 void game::drawGame()
 {
 	player.draw();
-	for (int i = 0; i < laneArr.size(); i++)
-	{
-		laneArr[i].draw();
-	}
+	cout << player.getX() << " " << player.getY() << endl;
+	//for (int i = 0; i < laneArr.size(); i++)
+	//{
+	//	laneArr[i].draw();
+	//}
 }
 
 void game::drawHome()
 {
-	int x = (cHeight - 100) / 2;
+	int x = getWidth()-115;
 	int color = rand() % 7 + 9;
 	TextColor(color);
-	gotoXY(x, 0);
-	cout << " ******  *******    *******   ****    ****   **    **		******     *******      **       ******" << endl;
-	gotoXY(x, 1);
-	cout << "**       **   **    **   **   **      **      **  **		**   **    **   **     ** **     **   **" << endl;
 	gotoXY(x, 2);
-	cout << "**	 ** * **    **   **   *****   *****     **		** * **    **   **    **   **    **    **" << endl;
+	cout << " ******  *******    *******   ****    ****   **    **		******     *******      **       ******" << endl;
 	gotoXY(x, 3);
-	cout << "**	 **   **    **   **	 **      **     **		**   **    **   **   ** *** **   **   **" << endl;
+	cout << "**       **   **    **   **   **      **      **  **		**   **    **   **     ** **     **   **" << endl;
 	gotoXY(x, 4);
+	cout << "**	 ** * **    **   **   *****   *****     **		** * **    **   **    **   **    **    **" << endl;
+	gotoXY(x, 5);
+	cout << "**	 **   **    **   **	 **      **     **		**   **    **   **   ** *** **   **   **" << endl;
+	gotoXY(x, 6);
 	cout << " ******  **    **   *******   *****   *****     **		**    **   *******  **       **  ******" << endl;
-	TextColor(7);
-	TextColor(238);
+	TextColor(15);
 
-	for (int i = 0; i <= cHeight; i++)
+	for (int i = 1; i < getWidth(); i++)
 	{
-		for (int j = 10; j <= 40; j++)
+		for (int j = 10; j <= 20; j++)
 		{
-			if (j == 10 || j == 40)
+			if (i % 25 == 0 && j % 2 == 0) {
+				gotoXY(i, j);
+				cout << (char)219;
+			}
+			if (j == 10 || j == 20)
 			{
 				gotoXY(i, j);
-				cout << "*";
-			}
-			if (i % 30 == 0 && j % 2 == 0) {
-				gotoXY(i, j);
-				cout << "*";
+				cout << (char)178;
 			}
 		}
 	}
+	Sleep(100);
 }
 
-void game::drawMenuGame(int x,  int y)
+void game::drawMenuGame()
 {
-	TextColor(ColorCode_Pink);
-	gotoXY(x + 5, y + 10);
+	int x = WIDHT + 13;
+	int y = 0;
+	TextColor(ColorCode_Red);
+	gotoXY(x, y + 5);
+	cout << "LEVEL MAX: " << this->lvMax;
+	gotoXY(x, y + 6);
 	cout << "SCORE: " << this->score;
-	gotoXY(x+10, y+10);
+	gotoXY(x, y + 7);
+	cout << "LEVEL: " << this->lv;
+	TextColor(ColorCode_Pink);
+	gotoXY(x, y+10);
 	cout << "Press W to UP";
-	gotoXY(x+11, y+10);
+	gotoXY(x, y+11);
 	cout << "Press A to LEFT";
-	gotoXY(x+12, y+10);
+	gotoXY(x, y+12);
 	cout << "Press S to DOWN";
-	gotoXY(x+13, y+10);
+	gotoXY(x, y+13);
 	cout << "Press D to RIGHT";
-	gotoXY(x+14, y+10);
+	gotoXY(x, y+14);
 	cout << "Press P to PauseGame";
-	gotoXY(x+15, y+10);
+	gotoXY(x, y+15);
 	cout << "Press L to SaveGame";
-	gotoXY(x+16, y+10);
+	gotoXY(x, y+16);
 	cout << "Press E to Exit";
-	gotoXY(x+17, y+10);
+	gotoXY(x, y+17);
 	cout << "Press T to LoadGame";
 	TextColor(7);
 	TextColor(187);
-	for (int i = 0; i <= cHeight; i++)
+	for (int i = 0; i <= HEIGHT; i++)
 	{
 		gotoXY(0, i);
-		cout << "*";
-		gotoXY(cWidth, i);
-		cout << "*";
+		cout << (char)219;
+		gotoXY(getWidth()-1, i);
+		cout << (char)219;
+		gotoXY(WIDHT+1, i);
+		cout << (char)219;
 	}
-	for (int i = 0; i < cWidth; i++)
+	for (int i = 0; i < getWidth(); i++)
 	{
 		gotoXY(i, 0);
-		cout << "*";
-		gotoXY(i, cHeight);
-		cout << "*";
-		gotoXY(i, y);
-		cout << "*";
+		cout << (char)219;
+		gotoXY(i, HEIGHT);
+		cout << (char)219;
 	}
 	TextColor(7);
 }
@@ -91,8 +112,8 @@ void game::drawMenuHome()
 	int menuSize = 4;
 	char menu[][20] = { "Start Game", "Load Game", "Setting", "Exit"};
 	int pos = 0;
-	int x = cHeight / 2;
-	int y = 20;
+	int x = getWidth();
+	int y = 13;
 	while (1)
 	{
 		drawHome();
@@ -102,29 +123,26 @@ void game::drawMenuHome()
 			if (i == pos)
 			{
 				TextColor(227);
-				gotoXY(x - strlen(menu[i]), y + i);
+				gotoXY((x-strlen(menu[i]))/2, y + i);
 				cout << menu[i];
 				TextColor(7);
 			}
 			else
 			{
-				gotoXY(x, y + i);
+				gotoXY((x - strlen(menu[i])) / 2, y + i);
 				cout << menu[i];
 			}
 		}
-		while (1)
+		if (_kbhit())
 		{
-			if (_kbhit())
+			char key = _getch();
+			switch (key)
 			{
-				
-				int key = _getch();
-				switch (key)
-				{
-				case (int)'w': case (int)'W': case 72: {
+				case 'w': case 'W': {
 					pos = (pos - 1 + menuSize) % menuSize;
 					break;
 				}
-				case (int)'s': case (int)'S': case 80: {
+				case 's': case 'S':  {
 					pos = (pos + 1) % menuSize;
 					break;
 				}
@@ -132,21 +150,23 @@ void game::drawMenuHome()
 					if (pos == 0)
 					{
 						startGame();
+						return;
 					}
 					if (pos == 1)
 					{
 						loadGame();
+						return;
 					}
 					if (pos == 2)
 					{
 						settingGame();
+						return;
 					}
 					if (pos == 3)
 					{
 						exit(0);
 					}
 					break;
-				}
 				}
 			}
 		}
@@ -228,7 +248,7 @@ void game::lvUp()
 void game::startGame()
 {
 	system("cls");
-	drawMenuGame(20, cHeight-50);
+	drawMenuGame();
 	drawGame();
 }
 
@@ -305,6 +325,10 @@ void game::saveGame()
 	return;
 }
 
+void game::settingGame()
+{
+}
+
 void game::pauseGame(HANDLE t)
 {
 	SuspendThread(t);
@@ -326,7 +350,7 @@ void game::updateLane()
 
 bool game::checkLane()
 {
-	laneArr[this->player.getY()].checkLane(player);
+	return laneArr[this->player.getY()].checkLane(player);
 }
 
 void game::drawDie()
@@ -349,6 +373,10 @@ int game::getLane()
 people game::getPeople()
 {
 	return this->player;
+}
+
+void game::Delete()
+{
 }
 
 bool game::isRunning()

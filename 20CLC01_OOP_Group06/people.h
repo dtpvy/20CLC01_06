@@ -2,13 +2,12 @@
 #ifndef _people_h
 #define _people_h
 #include "point.h"
-#include "car.h"
 #include "console.h"
 
 static const int bLEFT = 7;
 static const int bTOP = 1;
 static const int bRIGHT = 108; 
-static const int bBOTTOM = 33; 
+static const int bBOTTOM = 29; 
 static const int LIFE = 3;
 
 class people: public point

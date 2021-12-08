@@ -71,7 +71,8 @@ int whereY();
 
 void TextColor(int color);
 //end----------------------Screen----------------------end
-
+int getWidth();
+int getHeight();
 
 #endif
 

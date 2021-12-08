@@ -1,13 +1,8 @@
-#include <iostream>
-using namespace std;
-
 #include "car.h"
-#include "vehicle.h"
-#include "console.h"
 
-car::car(){}
+car::car() {}
 
-car::car(int x,int y,bool direction):vehicle(x,y,direction){}
+car::car(int x, int y, bool direction) :vehicle(x, y, direction) {}
 
 void car::drawForward()
 {

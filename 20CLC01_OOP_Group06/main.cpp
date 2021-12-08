@@ -4,16 +4,12 @@
 #include <thread>
 game* cg;
 char MOVING;
-void SetWindowSize(SHORT width, SHORT height)
+void SetWindowSize(int width, int height)
 {
-	HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
-	SMALL_RECT WindowSize;
-	WindowSize.Top = 0;
-	WindowSize.Left = 0;
-	WindowSize.Bottom = height;
-	WindowSize.Right = width;
-
-	SetConsoleWindowInfo(hStdout, 1, &WindowSize);
+	HWND console = GetConsoleWindow();
+	RECT r;
+	GetWindowRect(console, &r);
+	MoveWindow(console, r.left, r.top, width, height, TRUE);
 }
 
 void ShowCur(bool CursorVisibility) // xóa dấu con trỏ
@@ -34,35 +30,11 @@ void SubThread()
 		}
 		MOVING = ' ';// Tạm khóa không cho di chuyển, chờ nhận phím từ hàm main
 		
-		cg->updateLane(); //Cập nhật vị trí thú
 		cg->drawGame(); //ve
+		cg->updateLane(); //Cập nhật vị trí thú
 
 		//kiem tra nguoi voi cac vi tri
-		if (cg->checkLane())
-		{
-			//xử lí khi chết
-			cg->drawDie();
-			gotoXY(1, HEIGHT + 3);
-			cout << " nhan Y de tiep tuc tro choi";
-			char temp = toupper(_getch());
-			if (temp == 'Y')
-			{
-				system("pause");
-
-				cg->startGame();
-			}
-
-			else
-				exit(0);
-		}
-		if (cg->getPeople().isFinish())
-		{
-			// Xử lý khi về đích
-			// cho level tang, xoaa het vat can sau do ve  lai.
-
-			cg->lvUp();
-		}
-		Sleep(cg->speedGame(cg->getPeople().getY()));
+		Sleep(cg->speedGame());
 
 	}
 }
@@ -72,55 +44,10 @@ int main()
 {
 	cg = new game;
 	char temp;
-	SetWindowSize();
-	thread t1(SubThread);
-	while (1)
-	{
-		ShowCur(false); //xóa dấu nháy con trỏ.
-		temp = toupper(_getch());
-		if (!cg->getPeople().isDead())
-		{
-			if (temp == 27)
-			{
-				cg->exitGame(t1.native_handle());
-			}
-			else if (temp == 'P')
-			{
-				cg->pauseGame(t1.native_handle());
-
-			}
-			else if (temp == 'L')
-			{
-				cg->pauseGame(t1.native_handle());
-				cg->saveGame();
-			}
-			else if (temp == 'T')
-			{
-				mciSendStringA("stop nen.mp3", 0, NULL, 0);
-				cg->pauseGame(t1.native_handle());
-				system("cls");
-				cg->loadGame();
-				cg->startGame();
-				cg->drawGame();
-				mciSendStringA("play nen.mp3", 0, NULL, 0);
-
-
-			}
-			else
-			{
-				cg->resumeGame((HANDLE)t1.native_handle());
-				MOVING = temp; //Cập nhật bước di chuyển
-			}
-		}
-		else
-		{
-			if (temp == 'Y')
-				cg->startGame();
-			else {
-				cg->exitGame(t1.native_handle());
-				return;
-			}
-		}
-	}
+	SetWindowSize(cWidth, cHeight);	
+	cg->createGame();
+	ShowCur(false); //xóa dấu nháy con trỏ.
+	cg->drawMenuHome();
+	Sleep(1500);
 	return 0;
 }

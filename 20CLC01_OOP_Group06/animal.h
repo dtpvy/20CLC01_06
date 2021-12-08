@@ -4,7 +4,7 @@
 
 #include "point.h"
 #define WIDTH 115
-#define HEIGHT 36
+#define HEIGHT 30
 #include "people.h"
 
 class animal : public point

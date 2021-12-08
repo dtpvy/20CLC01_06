@@ -4,7 +4,7 @@
 people::people()
 {
 	this->m_State = true;
-	old_X = X = bRIGHT / 2 - 1;
+	old_X = X = bRIGHT / 2 - 3;
 	old_Y = Y = bBOTTOM - 1;
 	this->remain = LIFE;
 }
@@ -79,7 +79,7 @@ void people::goLeft()
 void people::reset()
 {
 	remain -= 1;
-	this->old_X = this->X = bRIGHT / 2 - 1;
+	this->old_X = this->X = bRIGHT / 2 - 3;
 	this->old_Y = this->Y = bBOTTOM - 1;
 	this->m_State = true;
 }

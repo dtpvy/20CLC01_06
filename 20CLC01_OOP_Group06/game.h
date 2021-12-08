@@ -11,8 +11,10 @@
 #include <conio.h>
 #include <fstream>
 #include <time.h>
-#define cWidth 1036
+#define cWidth 1024
 #define cHeight 600
+#define WIDTH 115
+#define HEIGHT 31
 #define UP 72
 #define LEFT 75
 #define RIGHT 77
@@ -32,12 +34,11 @@ public:
 	~game();
 	void drawGame();
 	void drawHome();
-	void drawMenuGame(int x, int y);
+	void drawMenuGame();
 	void drawMenuHome();
 	void createGame();
 	void updatePosPeople(int c);
 	void lvUp();
-	void gameSetting();
 	void drawDie();
 	int speedGame();
 	int getLane();
@@ -57,6 +58,4 @@ public:
 };
 
 #endif // !_game_h
-
-
 

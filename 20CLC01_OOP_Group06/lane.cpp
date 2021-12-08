@@ -88,7 +88,7 @@ bool lane::checkLane(people p)
 	return ok;
 }
 
-bool lane::writeFile(fstream& fo)
+void lane::writeFile(fstream& fo)
 {
 	fo << this->type << " " << this->_light << " " << this->direction;
 	if (this->_light)
@@ -118,7 +118,7 @@ bool lane::writeFile(fstream& fo)
 	}
 }
 
-vehicle* lane::createVehicle(int type, int x, int y)
+vehicle*& lane::createVehicle(int type, int x, int y)
 {
 	vehicle* tmp;
 	switch (type)
@@ -134,10 +134,11 @@ vehicle* lane::createVehicle(int type, int x, int y)
 		break;
 	}
 	}
+	return tmp;
 }
 
 
-animal* lane::createAnimal(int type, int x, int y)
+animal*& lane::createAnimal(int type, int x, int y)
 {
 	animal* tmp;
 	switch (type)
@@ -158,6 +159,7 @@ animal* lane::createAnimal(int type, int x, int y)
 		break;
 	}
 	}
+	return tmp;
 }
 
 

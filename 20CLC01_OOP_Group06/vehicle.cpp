@@ -1,6 +1,3 @@
-#include <iostream>
-using namespace std;
-
 #include "vehicle.h"
 
 vehicle::vehicle():direction(true){}

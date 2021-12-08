@@ -1,11 +1,12 @@
 #pragma once
-#ifndef _vehicle_h
-#define _vehicle_h
-
-#include "people.h"
+//#ifndef _vehicle_h
+//#define _vehicle_h
 #define WIDTH 115
-#define HEIGHT 36
+#define HEIGHT 30
+#include "people.h"
 #include "point.h"
+#include <iostream>
+using namespace std;
 
 class vehicle: public point 
 {
@@ -30,7 +31,5 @@ public:
 	virtual void move() = 0;
 };
 
-#endif // !_vehicle_h_
-
-
+//#endif // !_vehicle_h_
 

@@ -2,7 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="animal.cpp" />
-    <ClCompile Include="car.cpp" />
     <ClCompile Include="console.cpp" />
     <ClCompile Include="crawfish.cpp" />
     <ClCompile Include="dog.cpp" />
@@ -15,10 +14,10 @@
     <ClCompile Include="truck.cpp" />
     <ClCompile Include="snake.cpp" />
     <ClCompile Include="vehicle.cpp" />
+    <ClCompile Include="car.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animal.h" />
-    <ClInclude Include="car.h" />
     <ClInclude Include="console.h" />
     <ClInclude Include="crawfish.h" />
     <ClInclude Include="dog.h" />
@@ -30,5 +29,6 @@
     <ClInclude Include="truck.h" />
     <ClInclude Include="snake.h" />
     <ClInclude Include="vehicle.h" />
+    <ClInclude Include="car.h" />
   </ItemGroup>
 </Project>

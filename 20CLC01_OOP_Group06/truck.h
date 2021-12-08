@@ -1,7 +1,11 @@
-#ifndef TRUCK_H_
-#define TRUCK_H_
+#pragma once
+#ifndef _TRUCK_H_
+#define _TRUCK_H_
 
 #include "vehicle.h"
+#include "console.h"
+#include <iostream>
+using namespace std;
 
 class truck:public vehicle
 {

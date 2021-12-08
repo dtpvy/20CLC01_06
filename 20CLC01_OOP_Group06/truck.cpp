@@ -1,10 +1,5 @@
-#include <iostream>
-using namespace std;
-
-#include "vehicle.h"
-#include "console.h"
 #include "truck.h"
-#include "point.h"
+
 
 truck::truck() {}
 
@@ -241,6 +236,7 @@ bool truck::checkCrash(people p)
 	else
 		return checkCrashBackward(p);
 }
+
 void truck::move()
 {
 	int x = this->getX();

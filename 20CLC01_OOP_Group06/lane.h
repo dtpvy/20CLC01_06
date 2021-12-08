@@ -40,9 +40,9 @@ public:
 	void add(int type, int x, int y);
 	void set(int type, int _light, light tLight, int _direction);
 	void set(int type, int _light, int _direction);
-	bool writeFile(fstream& fo);
-	vehicle* createVehicle(int type, int x, int y);
-	animal* createAnimal(int type, int x, int y);
+	void writeFile(fstream& fo);
+	vehicle*& createVehicle(int type, int x, int y);
+	animal*& createAnimal(int type, int x, int y);
 	
 };
 
