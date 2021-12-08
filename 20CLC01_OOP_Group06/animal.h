@@ -4,7 +4,6 @@
 
 #include "point.h"
 #define WIDTH 115
-#define HEIGHT 30
 #include "people.h"
 
 class animal : public point
@@ -27,7 +26,8 @@ public:
 	virtual bool checkCrashBackward(people p) = 0;
 	virtual bool checkCrash(people p) = 0;
 
-	virtual void move() = 0;
+	virtual int getLength() = 0;
+	virtual bool move() = 0;
 };
 
 #endif // !_animal_h

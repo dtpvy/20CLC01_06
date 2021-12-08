@@ -11,10 +11,10 @@
 #include <conio.h>
 #include <fstream>
 #include <time.h>
-#define cWidth 1024
+#define cWidth 1280
 #define cHeight 600
 #define WIDTH 115
-#define HEIGHT 31
+#define GHEIGHT 31
 #define UP 72
 #define LEFT 75
 #define RIGHT 77

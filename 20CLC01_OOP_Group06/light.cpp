@@ -54,35 +54,25 @@ void light::draw()
 {
 	if (this->_status) // green light
 	{
-		gotoXY(X, Y);
+		gotoXY(this->getX(), this->getY());
 		TextColor(10);
 		cout << (char)220;
 		TextColor(8);
-		gotoXY(X, Y + 1);
+		gotoXY(this->getX(), this->getY() + 1);
 		cout << (char)223;
 	}
 	else
 	{
-		gotoXY(X, Y);
+		gotoXY(this->getX(), this->getY());
 		TextColor(8);
 		cout << (char)220;
 		TextColor(12);
-		gotoXY(X, Y + 1);
+		gotoXY(this->getX(), this->getY() + 1);
 		cout << (char)223;
 	}
 }
 
-void light::setX(int x)
-{
-	this->_status = x;
-}
-
-void light::setY(int y)
-{
-	this->_time = y;
-}
-
 void light::writeFile(fstream& fo)
 {
-	fo << this->_status << " " << this->_time << " " << this->X << " " << this->Y;
+	fo << this->_status << " " << this->_time << " " << this->getX() << " " << this->getY();
 }

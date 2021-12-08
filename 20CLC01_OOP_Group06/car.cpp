@@ -236,23 +236,26 @@ bool car::checkCrash( people p)
         return checkCrashBackward(p);
 }
 
-void car::move()
+int car::getLength()
+{
+    return 17;
+}
+
+bool car::move()
 {
     int x = this->getX();
     int y = this->getY();
-
     if (direction)
     {
+        if (this->getX() + 17 >= WIDTH) return false;
         ++x;
-        if (this->getX() + 17 >= WIDTH)
-            x = 0;
     }
     else
     {
+        if (this->getX() <= 0) return false;
         --x;
-        if (this->getX() <= 0)
-            x = WIDTH - 17;
     }
 
     this->moveXY(x, y);
+    return true;
 }

@@ -1,59 +1,201 @@
 #include "lane.h"
 
-
 lane::lane()
 {
-	srand((unsigned int)time(NULL));
-	this->direction = rand()*5 % 2;
-	if (rand() % 2 == 0) // negative
-	{
-		this->direction = -1 * this->direction;
-	}
+	this->type = 0;
+	this->row = HEIGHT;
 }
 
-void lane::createLane(int type, bool _light, int num, int y)
+lane::lane(int y)
 {
-	srand(time(NULL));
+	this->type = 0;
+	this->row = y;
+}
+
+lane::lane(const lane& lane)
+{
+	this->type = lane.type;
+	for (int i = 0; i < lane.animalArr.size(); i++)
+	{
+		this->animalArr.push_back(lane.animalArr[i]);
+	}
+	for (int i = 0; i < lane.vehicleArr.size(); i++)
+	{
+		this->vehicleArr.push_back(lane.vehicleArr[i]);
+	}
+	this->row = lane.row;
+	this->tLight = lane.tLight;
+	this->_light = lane._light;
+	this->direction = lane.direction;
+}
+
+void lane::createLane(int type, bool _light, int num, bool direction, int y)
+{
+	this->row = y;
 	this->type = type;
 	this->_light = _light;
+	this->direction = direction;
 	if (_light == true)
 	{
-		tLight.setX(rand() % (WIDHT / 2) + WIDHT / 2);
+		tLight.setX(rand() % (WIDTH - 30) + 30);
 		tLight.setY(y);
 	}
-	int x = 0;
-	for (int i = 0; i < num; i++)
+	if (this->direction)
 	{
-		x += -(rand() % (i * 5 + 10));
-		vehicleArr.push_back(createVehicle(type, x, y));
+		int x = 0;
+		for (int i = 0; i < num; i++)
+		{
+			vehicleArr.push_back(createVehicle(type, x, y));
+			x -= (rand() % 20 + 20);
+		}
+	}
+	else
+	{
+		int x = WIDTH;
+		for (int i = 0; i < num; i++)
+		{
+			vehicleArr.push_back(createVehicle(type, x, y));
+			x += (rand() % 20 + 20);
+		}
 	}
 }
 
-void lane::createLane(int type, int num, int y)
+void lane::createLane(int type, int num, bool direction, int y)
 {
+	this->row = y;
 	this->type = type;
-	int x = 0;
-	for (int i = 0; i < num; i++)
+	this->direction = direction;
+	if (this->direction)
 	{
-		x += -(rand() % (i * 5 + 10));
-		animalArr.push_back(createAnimal(type, x, y));
+		int x = 0;
+		for (int i = 0; i < num; i++)
+		{
+			animalArr.push_back(createAnimal(type, x, y));
+			x -= rand() % 20 + 8;
+		}
+	}
+	else
+	{
+		int x = WIDTH;
+		for (int i = 0; i < num; i++)
+		{
+			animalArr.push_back(createAnimal(type, x, y));
+			x += (rand() % 20 + 8);
+		}
 	}
 }
 
 void lane::updateLane()
 {
-	if (_light && tLight.getStatus()) // green light
+	updateLightTraffic();
+	int x = WIDTH * (1 - this->direction), y = 0;
+	if (vehicleArr.size() > 0)
 	{
-		for (int i = 0; i < vehicleArr.size(); i++)
+		if (_light && tLight.getStatus() || !_light) // green light
 		{
-			vehicleArr[i]->deleteChar();
-			vehicleArr[i]->move();
+			for (int i = 0; i < vehicleArr.size(); i++)
+			{
+				vehicleArr[i]->deleteChar();
+				if (!vehicleArr[i]->move())
+				{
+					if (this->direction)
+					{
+						x -= rand() % 20;
+						int tmp = (vehicleArr.size() + i - 1) % vehicleArr.size();
+						if (vehicleArr[tmp]->getX() <= 0)
+						{
+							x += (vehicleArr[tmp]->getX() - 20);
+						}
+						y = this->row;
+						delete vehicleArr[i];
+						vehicleArr[i] = createVehicle(type, x, y);
+					}
+					else
+					{
+						x += rand() % 20;
+						int tmp = (vehicleArr.size() + i - 1) % vehicleArr.size();
+						if (vehicleArr[tmp]->getX() + vehicleArr[i]->getLength() >= WIDTH)
+						{
+							x += (vehicleArr[tmp]->getX() + vehicleArr[tmp]->getLength() + 10);
+						}
+						y = this->row;
+						delete vehicleArr[i];
+						vehicleArr[i] = createVehicle(type, x, y);
+					}
+				}
+			}
+		}
+		if (_light && !tLight.getStatus())
+		{
+			for (int i = 0; i < vehicleArr.size(); i++)
+			{
+				vehicleArr[i]->deleteChar();
+				if (this->direction)
+				{
+					if (vehicleArr[i]->getX() + vehicleArr[i]->getLength() <= tLight.getX()) continue;
+					if (!vehicleArr[i]->move())
+					{
+						x -= rand() % 20;
+						int tmp = (vehicleArr.size() + i - 1) % vehicleArr.size();
+						if (vehicleArr[tmp]->getX() <= 0)
+						{
+							x += (vehicleArr[tmp]->getX() - 20);
+						}
+						y = this->row; 
+						delete vehicleArr[i];
+						vehicleArr[i] = createVehicle(type, x, y);
+					}
+				}
+				else
+				{
+					if (vehicleArr[i]->getX() >= tLight.getX()) continue;
+					if (!vehicleArr[i]->move()) 
+					{
+						x += rand() % 20;
+						int tmp = (vehicleArr.size() + i - 1) % vehicleArr.size();
+						if (vehicleArr[tmp]->getX() + vehicleArr[i]->getLength() >= WIDTH)
+						{
+							x += (vehicleArr[tmp]->getX() + vehicleArr[tmp]->getLength() + 10);
+						}
+						y = this->row;
+						delete vehicleArr[i];
+						vehicleArr[i] = createVehicle(type, x, y);
+					}
+				}				
+			}
 		}
 	}
+	
 	for (int i = 0; i < animalArr.size(); i++)
 	{
 		animalArr[i]->deleteChar();
-		animalArr[i]->move();
+		if (!animalArr[i]->move())
+		{
+			if (this->direction)
+			{
+				x -= rand() % 20;
+				int tmp = (animalArr.size() + i - 1) % animalArr.size();
+				if (animalArr[tmp]->getX() <= 0)
+				{
+					x += (animalArr[tmp]->getX() - 8);
+				}
+				y = this->row; 
+				delete animalArr[i];
+				animalArr[i] = createAnimal(type, x, y);
+			}
+			else
+			{
+				x += rand() % 20;
+				int tmp = (animalArr.size() + i - 1) % animalArr.size();
+				if (animalArr[tmp]->getX() + animalArr[tmp]->getLength() >= WIDTH)
+				{
+					x += (animalArr[tmp]->getX() + animalArr[tmp]->getLength() + 8);
+				}
+				y = this->row;
+				delete animalArr[i];
+				animalArr[i] = createAnimal(type, x, y);
+			}
+		}
 	}
 }
 
@@ -165,74 +307,113 @@ animal*& lane::createAnimal(int type, int x, int y)
 
 void lane::draw()
 {
-	this->updateLane();
-	for (int i = 0; i < vehicleArr.size(); i++)
+	if (this->direction)
 	{
-		vehicleArr[i]->draw();
-	}
-	for (int j = 0; j < animalArr.size(); j++)
-	{
-		animalArr[j]->draw();
-	}
-	
-	if (_light)
-		tLight.draw();
-
-	if (!vehicleArr.empty())
-	{
-		int Y = vehicleArr[0]->getY();
-		TextColor(14);
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < vehicleArr.size(); i++)
 		{
-			gotoXY(0, Y + i);
-			cout << "     " << (char)186 << "  ";
-			gotoXY(WIDTH - 7, Y + i);
-			cout << "  " << (char)186 << "     ";
+			if (vehicleArr[i]->getX() > 2 && vehicleArr[i]->getX() < WIDTH)
+			{
+				vehicleArr[i]->draw();
+			}
+
+		}
+		for (int i = 0; i < animalArr.size(); i++)
+		{
+			if (animalArr[i]->getX() > 2 && animalArr[i]->getX() < WIDTH)
+			{
+				animalArr[i]->draw();
+			}
+
 		}
 	}
-	else if (!animalArr.empty())
+	else 
 	{
-		TextColor(14);
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < vehicleArr.size(); i++)
 		{
-			gotoXY(0, animalArr[0]->getY() + i);
-			cout << "     " << (char)186 << "  ";
-			gotoXY(WIDTH - 7, animalArr[0]->getY() + i);
-			cout << "  " << (char)186 << "     ";
+			if (vehicleArr[i]->getX() > 2 && vehicleArr[i]->getX() + vehicleArr[i]->getLength() < WIDTH)
+			{
+				vehicleArr[i]->draw();
+			}
+
+		}
+		for (int i = 0; i < animalArr.size(); i++)
+		{
+			if (animalArr[i]->getX() > 2 && animalArr[i]->getX() + animalArr[i]->getLength() < WIDTH)
+			{
+				animalArr[i]->draw();
+			}
 		}
 	}
+}
 
+void lane::drawLane()
+{
+	if (this->type == 0)
+	{
+		TextColor(ColorCode_Grey);
+		for (int i = 2; i < WIDTH; i++)
+		{
+			gotoXY(i, this->row-3);
+			cout << (char)205;
+		}
+	}
+	else 
+	{
+		TextColor(ColorCode_DarkWhite);
+		for (int i = 1; i < WIDTH; i++)
+		{
+			if (i % 5 != 0)
+			{
+				gotoXY(i, this->row - 1);
+				cout << (char)205;
+			}
+		}
+
+		
+		draw();
+		if (_light)
+		{
+			tLight.draw();
+		}
+	}
 }
 
 void lane::deleteChar()
 {
 	for (int i = 0; i < vehicleArr.size(); i++)
 	{
-		vehicleArr[i]->deleteChar();
+		if (vehicleArr[i]->getX() > 0 && vehicleArr[i]->getX() < WIDTH)
+		{
+			vehicleArr[i]->deleteChar();
+		}
 	}
 	for (int i = 0; i < animalArr.size(); i++)
 	{
-		animalArr[i]->deleteChar();
+		if (animalArr[i]->getX() > 0 && animalArr[i]->getX() < WIDTH)
+		{
+			animalArr[i]->deleteChar();
+		}
+		
 	}
 }
 
 void lane::reset()
 {
-	int coor_Y;
-	if ((this->type == 1 || this->type == 2) && !vehicleArr.empty())
-	{
-		coor_Y = vehicleArr[0]->getY();
-		vehicleArr.clear();
-		createLane(this->type, this->_light, 4, coor_Y);
-		if(this->_light)
-			tLight.set(true, 0);
-	}
-	else
-	{
-		coor_Y = animalArr[0]->getY();
-		animalArr.clear();
-		createLane(this->type, 4, coor_Y);
-	}
+	//int coor_Y;
+	//if ((this->type == 1 || this->type == 2) && !vehicleArr.empty())
+	//{
+	//	coor_Y = vehicleArr[0]->getY();
+	//	vehicleArr.clear();
+	//	createLane(this->type, this->_light, 4, coor_Y);
+	//	if(this->_light)
+	//		tLight.set(true, 0);
+	//}
+	//else
+	//{
+	//	coor_Y = animalArr[0]->getY();
+	//	animalArr.clear();
+	//	createLane(this->type, 4, coor_Y);
+	//}
 }
 
 void lane::add(int type, int x, int y)
@@ -261,166 +442,4 @@ void lane::set(int type, int light, int _direction)
 	this->_light = light;
 	this->direction = _direction;
 }
-
-
-//void lane::TransitionTo(Map* state)
-//{
-//	if (cur_state)
-//		delete cur_state;
-//	cur_state = state;
-//}
-//
-//void lane::DrawLane(int x, int y, int step, int _start_index)
-//{
-//	if (!cur_state)
-//		return;
-//	cur_state->draw(x, y, step, _start_index);
-//}
-//
-//void lane::Erase(int x, int y)
-//{
-//	if (!cur_state)
-//		return;
-//	cur_state->Erase(x, y);
-//}
-//
-//int lane::LenOfLane()
-//{
-//	if (!cur_state)
-//		return -1;
-//	return cur_state->LengthOfLane();
-//}
-
-/////MAP 1////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//Map1::Map1()
-//{
-//	this->RawLane = 
-//	{
-//		{0, { 7,"                    0000000000                      0000000000                     0000000000                          0000000000                      0000000000" }}, //0
-//		{0, { 7,"                    0000000000                      0000000000                     0000000000                          0000000000                      0000000000"}}, //1
-//		{-2,{ 7,"             XXXX      XXXX                   XXXX XXXX XXXX             XXXX          XXXX XXXX   XXXX     XXXX XXXX                     XXXX      XXXX         "}}, //2 
-//		{-2,{ 7,"             XXXX      XXXX                   XXXX XXXX XXXX             XXXX          XXXX XXXX   XXXX     XXXX XXXX                     XXXX      XXXX         "}}, //3
-//		{1, { 7,"     BBBBBBBBBBBB                  BBBBBBBBBBBB               BBBBBBBBBBBB               BBBBBBBBBBBB          BBBBBBBBBBBB                     BBBBBBBBBBBB     "}}, //4
-//		{1, { 7,"     BBBBBBBBBBBB                  BBBBBBBBBBBB               BBBBBBBBBBBB               BBBBBBBBBBBB          BBBBBBBBBBBB                     BBBBBBBBBBBB     "}}, //5
-//		{0, { 7,"                             0000000000                       0000000000                 0000000000                 0000000000                  0000000000       "}}, //6
-//		{0, { 7,"                             0000000000                       0000000000                 0000000000                 0000000000                  0000000000       "}}, //7
-//		{2, { 7,"    XXXX                  XXXX              XXXX        XXXX             XXXX          XXXX                                      XXXX                            "}}, //8
-//		{2, { 7,"    XXXX                  XXXX              XXXX        XXXX             XXXX          XXXX                                      XXXX                            "}}, //9
-//		{0, { 7,"                                                                                                                                                                 "}}, //10
-//		{-2,{ 7,"              DDD                               DDD       CCC                        CCC        DDD                          DDD DDD                             "}}, //11
-//		{0, { 7,"                                                                                                                                                                 "}}, //12
-//		{0, { 7,"                                                                                                                                                                 "}} //13
-//	};
-//	this->eraseStr = "                                                                                                                               ";
-//	this->Light =
-//	{
-//		{true,-1}, {true,-1}, {true,105}, {true,105}, {true,-1}, {true,-1}, {true,-1}, {true,-1}, {true,-1}, {true,-1}, {true,-1}, {true,-1}, {true,-1}, {true,-1}
-//	};
-//}
-//
-//void Map1::draw(int x, int y, int step, int start_index)
-//{
-//	int _step = 0;
-//	string handling("");
-//	int totalLanes = RawLane.size();
-//	int lenOfLane = RawLane[0].second.second.length();
-//	int pos, last_pos;
-//	for (int i = 0; i < totalLanes; i++)
-//	{
-//		gotoXY(x, y + _step);
-//		pos = (start_index * RawLane[i].first + 2 * lenOfLane) % lenOfLane;
-//		Light_execution(x, y + _step, i, pos);
-//		last_pos = (pos + LENGTH) % lenOfLane;
-//		if (last_pos > pos)
-//		{
-//			handling.append(RawLane[i].second.second, pos, last_pos - pos);
-//		}
-//		//else if(RawLane[i].first >= 0) // velocity < 0
-//		//{
-//		//	handling.append(RawLane[i].second, pos, lenOfLane - pos);
-//		//	handling.append(RawLane[i].second, 0, last_pos);
-//		//}
-//		//else // velocity >= 0 
-//		//{
-//		//	handling.append(RawLane[i].second, 0, last_pos);
-//		//	handling.append(RawLane[i].second, pos, lenOfLane - pos);
-//		//}
-//		else
-//		{
-//			handling.append(RawLane[i].second.second, pos, lenOfLane - pos);
-//			handling.append(RawLane[i].second.second, 0, last_pos);
-//		}
-//		TextColor(RawLane[i].second.first);
-//		cout << handling;
-//		handling.clear();
-//		_step += step;
-//	}
-//}
-//
-//int Map1::LengthOfLane()
-//{
-//	return RawLane[0].second.second.length();
-//}
-//
-//void Map1::Erase(int x, int y)
-//{
-//	int numLanes = RawLane.size();
-//	for (int i = 0; i < numLanes; i++)
-//	{
-//		gotoXY(x, y);
-//		cout << eraseStr;
-//		y += 1;
-//	}
-//}
-//
-//void Map1::Light_execution(int x, int y, int lane_index, int& pos)
-//{
-//	if (Light[lane_index].first == true) // running - green light
-//	{
-//		if (Light[lane_index].second < 0)
-//		{
-//			cout << " ";
-//			return;
-//		}
-//		else if (pos == Light[lane_index].second)
-//		{
-//			Light[lane_index].second = (pos + RawLane[lane_index].first * Stoptime + RawLane[lane_index].second.second.length()) % RawLane[lane_index].second.second.length();
-//			Light[lane_index].first = false;
-//			TextColor(12);
-//			cout << (char)15;
-//			TextColor(7);
-//			return; // turn into red light
-//		}
-//	}
-//	else // stopping - red light
-//	{
-//		if (Light[lane_index].second < 0)
-//		{
-//			cout << " ";
-//			return;
-//		}
-//		else if (pos != Light[lane_index].second)
-//		{
-//			pos = Light[lane_index].second;
-//			TextColor(12);
-//			cout << (char)15;
-//			TextColor(7);
-//			return; // still red light
-//		}
-//		else
-//		{
-//			pos = Light[lane_index].second;
-//			Light[lane_index].first = true;
-//		}
-//	}
-//	TextColor(10);
-//	cout << (char)15;
-//	TextColor(7);  // turn into green light
-//}
-//
-//void Map1::LoadCharacter()
-//{
-//
-//}
 

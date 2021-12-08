@@ -3,7 +3,7 @@
 #define _light_h
 #include "point.h"
 #include "console.h"
-#define greenLight 10
+#define greenLight 20
 #define redLight 10
 
 class light: public point
@@ -11,7 +11,6 @@ class light: public point
 private:
 	bool _status;
 	int _time;
-	int X, Y;
 public:
 	light();
 	bool getStatus();
@@ -21,8 +20,6 @@ public:
 	void updateTime();
 	void draw();
 	void writeFile(fstream& fo);
-	void setX(int x);
-	void setY(int y);
 };
 
 

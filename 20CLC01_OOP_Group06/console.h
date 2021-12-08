@@ -6,8 +6,6 @@
 #include <string>
 #include <Windows.h>
 using namespace std;
-#define WIDHT 80
-#define HEIGHT 19
 class console
 {
 public:

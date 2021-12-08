@@ -2,7 +2,6 @@
 //#ifndef _vehicle_h
 //#define _vehicle_h
 #define WIDTH 115
-#define HEIGHT 30
 #include "people.h"
 #include "point.h"
 #include <iostream>
@@ -28,7 +27,8 @@ public:
 	virtual bool checkCrashBackward(people p) = 0;
 	virtual bool checkCrash(people p) = 0;
 
-	virtual void move() = 0;
+	virtual int getLength() = 0;
+	virtual bool move() = 0;
 };
 
 //#endif // !_vehicle_h_

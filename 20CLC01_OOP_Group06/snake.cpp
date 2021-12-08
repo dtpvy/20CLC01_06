@@ -134,22 +134,23 @@ bool snake::checkCrash(people p) {
 		return checkCrashBackward(p);
 }
 
-void snake::move()
+int snake::getLength()
+{
+	return 6;
+}
+
+bool snake::move()
 {
 	int x = this->getX();
 	int y = this->getY();
-
 	if (direction) {
+		if (this->getX() + 6 >= WIDTH) return false;
 		++x;
-		if (this->getX() + 6 >= WIDTH) {
-			x = 0;
-		}
 	}
 	else {
+		if (this->getX() <= 0) return false;
 		--x;
-		if (this->getX() <= 0) {
-			x = WIDTH - 6;
-		}
 	}
 	this->moveXY(x, y);
+	return true;
 }

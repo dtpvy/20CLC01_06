@@ -187,21 +187,23 @@ bool dog::checkCrash(people p) {
 	else return checkCrashBackward(p);
 }
 
-void dog::move()
+int dog::getLength()
+{
+	return 6;
+}
+
+bool dog::move()
 {
 	int x = this->getX();
 	int y = this->getY();
 	if (direction) {
+		if (this->getX() + 6 >= WIDTH) return false;
 		++x;
-		if (this->getX() + 6 >= WIDTH) {
-			x = 0;
-		}
 	}
 	else {
+		if (this->getX() <= 0) return false;
 		--x;
-		if (this->getX() <= 0) {
-			x = WIDTH - 6;
-		}
 	}
 	this->moveXY(x, y);
+	return true;
 }

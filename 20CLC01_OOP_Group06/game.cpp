@@ -16,11 +16,10 @@ game::~game()
 void game::drawGame()
 {
 	player.draw();
-	cout << player.getX() << " " << player.getY() << endl;
-	//for (int i = 0; i < laneArr.size(); i++)
-	//{
-	//	laneArr[i].draw();
-	//}
+	for (int i = 0; i < laneArr.size(); i++)
+	{
+		laneArr[i].drawLane();
+	}
 }
 
 void game::drawHome()
@@ -60,7 +59,7 @@ void game::drawHome()
 
 void game::drawMenuGame()
 {
-	int x = WIDHT + 13;
+	int x = WIDTH + 10;
 	int y = 0;
 	TextColor(ColorCode_Red);
 	gotoXY(x, y + 5);
@@ -88,20 +87,20 @@ void game::drawMenuGame()
 	cout << "Press T to LoadGame";
 	TextColor(7);
 	TextColor(187);
-	for (int i = 0; i <= HEIGHT; i++)
+	for (int i = 0; i <= GHEIGHT; i++)
 	{
 		gotoXY(0, i);
 		cout << (char)219;
 		gotoXY(getWidth()-1, i);
 		cout << (char)219;
-		gotoXY(WIDHT+1, i);
+		gotoXY(WIDTH+1, i);
 		cout << (char)219;
 	}
 	for (int i = 0; i < getWidth(); i++)
 	{
 		gotoXY(i, 0);
 		cout << (char)219;
-		gotoXY(i, HEIGHT);
+		gotoXY(i, GHEIGHT);
 		cout << (char)219;
 	}
 	TextColor(7);
@@ -175,28 +174,48 @@ void game::drawMenuHome()
 
 void game::createGame()
 {
+	
+	srand(time(NULL));
 	lane tmp;
 	laneArr.push_back(tmp);
-	for (int i = HEIGHT-4; i >= 0; i-=4)
+	int i = HEIGHT - 3;
+	int cnt = 0;
+	while (i > 0 && cnt < 4)
 	{
-		int type = rand() % 6;
-		int num = rand() % 5 + 1;
+		int type = rand() % 3 + 1;
+		if (i - 5 < 0)
+		{
+			if (i - 4 < 0)
+			{
+				laneArr.push_back(lane(i));
+				break;
+			}
+			else
+			{
+				type = (type < 3) ? (rand() % 3 + 3) : type;
+			}
+		}
+		int num = rand() % 3 + 2;
+		int light = (num + rand() % 2) % 2;
 		lane cLane;
 		switch (type)
 		{
-			case 1: case 2: 
-			{
-				cLane.createLane(type, rand() % 2, num, i);
-				break;
-			}
-			case 3: case 4: case 5:
-			{
-				cLane.createLane(type, num, i);
-				break;
-			}
+		case 1: case 2:
+		{
+			i -= 5;
+			cLane.createLane(type, light, num, rand() % 2, i);
+			break;
 		}
-
+		case 3: case 4: case 5:
+		{
+			i -= 4;
+			cLane.createLane(type, num + rand() % 2, rand() % 2, i);
+			break;
+		}
+		}
+		--i;
 		laneArr.push_back(cLane);
+		++cnt;
 	}
 }
 
@@ -235,7 +254,7 @@ void game::lvUp()
 	laneArr.clear();
 	if (lv == lvMax)
 	{
-		gotoXY(2, HEIGHT + 2);
+		gotoXY(2, GHEIGHT + 2);
 		cout << "You win";
 		_getch();
 		exit(0);
@@ -248,8 +267,8 @@ void game::lvUp()
 void game::startGame()
 {
 	system("cls");
-	drawMenuGame();
 	drawGame();
+	drawMenuGame();
 }
 
 void game::loadGame()
@@ -362,7 +381,7 @@ void game::drawDie()
 
 int game::speedGame()
 {
-	return (((double)lvMax-lv+1)/10)*100;
+	return (((double)lvMax-lv+1)/10)*50;
 }
 
 int game::getLane()

@@ -21,7 +21,8 @@ public:
 	void deleteCharBackward();
 	void deleteChar();
 
-	void move();
+	int getLength();
+	bool move();
 };
 
 #endif // !_dog_h

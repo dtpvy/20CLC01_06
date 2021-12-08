@@ -235,22 +235,22 @@ bool crawfish::checkCrash(people p)
 	else
 		return checkCrashBackward(p);
 }
-void crawfish::move()
+int crawfish::getLength()
+{
+	return 6;
+}
+bool crawfish::move()
 {
 	int x = this->getX();
 	int y = this->getY();
 
 	if (direction) {
+		if (this->getX() + 6 >= WIDTH) return false;
 		++x;
-		if (this->getX() + 6 >= WIDTH) {
-			x = 0;
-		}
 	}
 	else {
-		--x;
-		if (this->getX() <= 0) {
-			x = WIDTH - 6;
-		}
+		if (this->getX() <= 0) return false;
 	}
 	this->moveXY(x, y);
+	return true;
 }

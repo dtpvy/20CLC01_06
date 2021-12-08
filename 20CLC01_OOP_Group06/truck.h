@@ -25,7 +25,8 @@ public:
 	void deleteCharBackward();
 	void deleteChar();
 
-	void move();
+	int getLength();
+	bool move();
 };
 
 #endif // !TRUCK_H_

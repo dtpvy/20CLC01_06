@@ -35,7 +35,6 @@ void SubThread()
 
 		//kiem tra nguoi voi cac vi tri
 		Sleep(cg->speedGame());
-
 	}
 }
 
@@ -45,9 +44,15 @@ int main()
 	cg = new game;
 	char temp;
 	SetWindowSize(cWidth, cHeight);	
+	ShowCur(false);
 	cg->createGame();
-	ShowCur(false); //xóa dấu nháy con trỏ.
-	cg->drawMenuHome();
+	cg->drawMenuGame();
+	while (1)
+	{
+		cg->drawGame();
+		Sleep(50);
+		cg->updateLane();
+	}
 	Sleep(1500);
 	return 0;
 }

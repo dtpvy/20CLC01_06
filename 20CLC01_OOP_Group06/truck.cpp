@@ -40,9 +40,13 @@ void truck::drawForward()
 void truck::draw()
 {
 	if (direction)
+	{
 		drawForward();
+	}
 	else
+	{
 		drawBackward();
+	}
 }
 
 void truck::deleteCharBackward()
@@ -237,23 +241,26 @@ bool truck::checkCrash(people p)
 		return checkCrashBackward(p);
 }
 
-void truck::move()
+int truck::getLength()
+{
+	return 18;
+}
+
+bool truck::move()
 {
 	int x = this->getX();
 	int y = this->getY();
-
 	if (direction)
 	{
+		if (this->getX() + 18 >= WIDTH) return false;
 		++x;
-		if (this->getX() + 18 >= WIDTH)
-			x = 0;
 	}
 	else
 	{
+		if (this->getX() <= 0) return false;
 		--x;
-		if (this->getX() <= 0)
-			x = WIDTH - 18;
 	}
 
 	this->moveXY(x, y);
+	return true;
 }
