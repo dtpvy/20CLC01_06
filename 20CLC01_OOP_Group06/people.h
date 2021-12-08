@@ -5,18 +5,18 @@
 #include "console.h"
 
 static const int bLEFT = 7;
-static const int bTOP = 1;
-static const int bRIGHT = 108; 
-static const int bBOTTOM = 29; 
+static const int bTOP = 0;
+static const int bRIGHT = 70; 
+static const int bBOTTOM = 28; 
 static const int LIFE = 3;
 
 class people: public point
 {
 private:
 	bool m_State;
-	int X, Y;
-	int old_X, old_Y;
 	int remain;
+	int old_X, old_Y;
+
 public:
 	people();
 	//people(int,int)
