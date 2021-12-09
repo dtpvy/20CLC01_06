@@ -4,20 +4,27 @@
 - Chọn solution, open in Terminal
 - Clone repo (chỉ áp dụng cho lần đầu): 
   - Mở cmd, hoặc powershell, chọn thư mục
-  	git clone https://github.com/dtpvy/20CLC01_OOP_Group06.git
+  `git clone https://github.com/dtpvy/20CLC01_OOP_Group06.git`
   - Dùng clone repo trong Visual Studio
 Note: coi kỹ thư mục có file gì, tự chỉnh sửa cho hợp lý
 - Commit code:
   - Thêm tất cả thay đổi
-  	git add .
+  `git add .`
   - Chú thích cho thay đổi, yêu cầu bắt buộc, ghi rõ ràng, tiếng anh hay tiếng việt đều được
-  	git commit -m "your commit comment"
+  `git commit -m "your commit comment"`
   - Push commit lên
-  	git push
+  `git push`
   - Để xem thông tin commit, không cần thiết
-  	git log
+  `git log`
 - Lấy code về: 
-	git pull
+`git pull`
+- Gặp trục trặc về git nhưng không thể sửa
+  - Xóa file .git
+  - Tạo lại file .git
+  `git init`	
+  `git remote add origin https://github.com/dtpvy/20CLC01_OOP_Group06.git`
+  - Pull code về
+  `git pull`
 ## 2. Thành phần
 - .gitignore: loại bỏ các file được định dạng, cần thiết
 - README.md: file doc hướng dẫn, thêm tài liệu tham khảo
