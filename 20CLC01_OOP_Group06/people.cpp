@@ -1,7 +1,7 @@
 #include "people.h"
 
 
-people::people(): point((bRIGHT + 7) / 2, bBOTTOM)
+people::people(): point((bRIGHT + 3) / 2, bBOTTOM)
 {
 	this->m_State = true;
 	this->remain = LIFE;
@@ -13,7 +13,7 @@ void people::goUp()
 {
 	old_X = point::getX();
 	old_Y = point::getY();
-	if (old_Y >= bTOP)
+	if (old_Y <= bTOP)
 		return;
 	point::setY(old_Y - 1);
 }
@@ -23,7 +23,7 @@ void people::goDown()
 {
 	old_X = point::getX();
 	old_Y = point::getY();
-	if (old_Y <= bBOTTOM)
+	if (old_Y >= bBOTTOM)
 		return;
 	point::setY(old_Y + 1);
 }
@@ -49,7 +49,7 @@ void people::goLeft()
 void people::reset()
 {
 	remain -= 1;
-	point::setX((bRIGHT + 7) / 2);
+	point::setX((bRIGHT + 3) / 2);
 	point::setY(bBOTTOM);
 	this->old_X = point::getX();
 	this->old_Y = point::getY();

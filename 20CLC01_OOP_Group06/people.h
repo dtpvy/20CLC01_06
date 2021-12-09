@@ -4,9 +4,9 @@
 #include "point.h"
 #include "console.h"
 
-static const int bLEFT = 7;
-static const int bTOP = 0;
-static const int bRIGHT = 70; 
+static const int bLEFT = 0;
+static const int bTOP = 1;
+static const int bRIGHT = 112; 
 static const int bBOTTOM = 28; 
 static const int LIFE = 3;
 
