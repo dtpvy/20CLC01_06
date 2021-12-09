@@ -77,6 +77,7 @@ void dog::drawBackward() {
 }
 
 void dog::draw() {
+	TextColor(6);
 	if (direction) {
 		drawForward();
 	}

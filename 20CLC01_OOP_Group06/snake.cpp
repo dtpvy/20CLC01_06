@@ -50,6 +50,7 @@ void snake::drawBackward() {
 	cout << char(220);
 }
 void snake::draw() {
+	TextColor(10);
 	if (direction) {
 		drawForward();
 	}

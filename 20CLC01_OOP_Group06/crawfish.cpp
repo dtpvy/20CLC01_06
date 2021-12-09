@@ -101,6 +101,7 @@ void crawfish::drawBackward(){
 }
 
 void crawfish::draw() {
+	TextColor(5);
 	if (direction)
 		drawForward();
 	else
