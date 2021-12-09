@@ -3,8 +3,8 @@
 #define _light_h
 #include "point.h"
 #include "console.h"
-#define greenLight 20
-#define redLight 10
+#define greenLight 40
+#define redLight 20
 
 class light: public point
 {

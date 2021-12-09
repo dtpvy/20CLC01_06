@@ -50,7 +50,7 @@ int main()
 	while (1)
 	{
 		cg->drawGame();
-		Sleep(50);
+		Sleep(100);
 		cg->updateLane();
 	}
 	Sleep(1500);

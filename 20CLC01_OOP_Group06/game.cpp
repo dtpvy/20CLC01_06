@@ -98,8 +98,11 @@ void game::drawMenuGame()
 	}
 	for (int i = 0; i < getWidth(); i++)
 	{
-		gotoXY(i, 0);
-		cout << (char)219;
+		if (i > WIDTH)
+		{
+			gotoXY(i, 0);
+			cout << (char)219;
+		}
 		gotoXY(i, GHEIGHT);
 		cout << (char)219;
 	}
@@ -180,21 +183,9 @@ void game::createGame()
 	laneArr.push_back(tmp);
 	int i = HEIGHT - 3;
 	int cnt = 0;
-	while (i > 0 && cnt < 4)
+	while (i > 0)
 	{
-		int type = rand() % 3 + 1;
-		if (i - 5 < 0)
-		{
-			if (i - 4 < 0)
-			{
-				laneArr.push_back(lane(i));
-				break;
-			}
-			else
-			{
-				type = (type < 3) ? (rand() % 3 + 3) : type;
-			}
-		}
+		int type = rand() % 5 + 1;
 		int num = rand() % 3 + 2;
 		int light = (num + rand() % 2) % 2;
 		lane cLane;
@@ -203,12 +194,28 @@ void game::createGame()
 		case 1: case 2:
 		{
 			i -= 5;
+			if (i < 0) break;
 			cLane.createLane(type, light, num, rand() % 2, i);
 			break;
 		}
-		case 3: case 4: case 5:
+		case 3: 
 		{
-			i -= 4;
+			i = i - 3;
+			if (i < 0) break;
+			cLane.createLane(type, num + rand() % 2, rand() % 2, i);
+			break;
+		}
+		case 4:
+		{
+			i = i - 2;
+			if (i < 0) break;
+			cLane.createLane(type, num + rand() % 2, rand() % 2, i);
+			break;
+		}
+		case 5:
+		{
+			i = i - 4;
+			if (i < 0) break;
 			cLane.createLane(type, num + rand() % 2, rand() % 2, i);
 			break;
 		}
@@ -304,11 +311,11 @@ void game::loadGame()
 			tLight.set(status, _time);
 			tLight.setX(x);
 			tLight.setY(y);
-			tmp.set(type, _light, tLight, direction);
+			tmp.set(type, _light, tLight, direction, y);
 		}
 		else
 		{
-			tmp.set(type, _light, direction);
+			tmp.set(type, _light, direction, 1);
 		}
 
 		int num;

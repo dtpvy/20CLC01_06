@@ -45,11 +45,13 @@ public:
 	bool checkLane(people p);
 	void reset();
 	void add(int type, int x, int y);
-	void set(int type, int _light, light tLight, int _direction);
-	void set(int type, int _light, int _direction);
+	void set(int type, int _light, light tLight, int _direction, int row);
+	void set(int type, int _light, int _direction, int row);
 	void writeFile(fstream& fo);
 	vehicle*& createVehicle(int type, int x, int y);
 	animal*& createAnimal(int type, int x, int y);
+	bool checkInScreen(vehicle* vehicle);
+	bool checkInScreen(animal* animal);
 };
 
 #endif

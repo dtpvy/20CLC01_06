@@ -3,7 +3,6 @@
 light::light()
 {
 	this->_status = true;
-	this->_time = 0;
 }
 
 bool light::getStatus()

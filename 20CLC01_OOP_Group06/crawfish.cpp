@@ -11,93 +11,93 @@ crawfish::crawfish(int x, int y, bool direc) : animal(x, y, direc) {}
 void crawfish::drawForward(){
 	//row 1
 	gotoXY(this->getX() + 6, this->getY());
-	cout << char(220);
+	cout << (char)220;
 	gotoXY(this->getX() + 5, this->getY());
-	cout << char(220);
+	cout << (char)220;
 	gotoXY(this->getX() + 4, this->getY());
-	cout << char(220);
+	cout << (char)220;
 	gotoXY(this->getX(), this->getY());
-	cout << char(220);
+	cout << (char)220;
 
 	//row 2
 	gotoXY(this->getX() + 4, this->getY() + 1);
-	cout << char(220);
+	cout << (char)220;
 	gotoXY(this->getX() + 3, this->getY() + 1);
-	cout << char(219);
+	cout << (char)219;
 	gotoXY(this->getX() + 2, this->getY() + 1);
-	cout << char(220);
+	cout << (char)220;
 	gotoXY(this->getX() + 1, this->getY() + 1);
-	cout << char(220);
+	cout << (char)220;
 	gotoXY(this->getX(), this->getY() + 1);
-	cout << char(222);
+	cout << (char)222;
 
 	//row 3
 	gotoXY(this->getX() + 4, this->getY() + 2);
-	cout << char(223);
+	cout << (char)223;
 	gotoXY(this->getX() + 3, this->getY() + 2);
-	cout << char(219);
-	gotoXY(this->getX() + 2, this->getX() + 2);
-	cout << char(223);
-	gotoXY(this->getX() + 1, this->getX() + 2);
-	cout << char(223);
+	cout << (char)219;
+	gotoXY(this->getX() + 2, this->getY() + 2);
+	cout << (char)223;
+	gotoXY(this->getX() + 1, this->getY() + 2);
+	cout << (char)223;
 	gotoXY(this->getX(), this->getY() + 2);
-	cout << char(222);
+	cout << (char)222;
 
 	//row 4
 	gotoXY(this->getX() + 6, this->getY() + 3);
-	cout << char(223);
+	cout << (char)223;
 	gotoXY(this->getX() + 5, this->getY() + 3);
-	cout << char(223);
+	cout << (char)223;
 	gotoXY(this->getX() + 4, this->getY() + 3);
-	cout << char(223);
+	cout << (char)223;
 	gotoXY(this->getX(), this->getY() + 3);
-	cout << char(223);
+	cout << (char)223;
 }
 
 void crawfish::drawBackward(){
 	//row 1
 	gotoXY(this->getX(), this->getY());
-	cout << char(220);
+	cout << (char)220;
 	gotoXY(this->getX() + 1, this->getY());
-	cout << char(220);
+	cout << (char)220;
 	gotoXY(this->getX() + 2, this->getY());
-	cout << char(220);
+	cout << (char)220;
 	gotoXY(this->getX() + 6, this->getY());
-	cout << char(220);
+	cout << (char)220;
 
 	//row 2
 	gotoXY(this->getX() + 2, this->getY() + 1);
-	cout << char(220);
+	cout << (char)220;
 	gotoXY(this->getX() + 3, this->getY() + 1);
-	cout << char(219);
+	cout << (char)219;
 	gotoXY(this->getX() + 4, this->getY() + 1);
-	cout << char(220);
+	cout << (char)220;
 	gotoXY(this->getX() + 5, this->getY() + 1);
-	cout << char(220);
+	cout << (char)220;
 	gotoXY(this->getX() + 6, this->getY() + 1);
-	cout << char(221);
+	cout << (char)221;
 
 	//row 3
 	gotoXY(this->getX() + 2, this->getY() + 2);
-	cout << char(223);
+	cout << (char)223;
 	gotoXY(this->getX() + 3, this->getY() + 2);
-	cout << char(219);
-	gotoXY(this->getX() + 4, this->getX() + 2);
-	cout << char(223);
-	gotoXY(this->getX() + 5, this->getX() + 2);
-	cout << char(223);
+	cout << (char)219;
+	gotoXY(this->getX() + 4, this->getY() + 2);
+	cout << (char)223;
+	gotoXY(this->getX() + 5, this->getY() + 2);
+	cout << (char)223;
 	gotoXY(this->getX() + 6, this->getY() + 2);
-	cout << char(221);
+	cout << (char)221;
 
 	//row 4
 	gotoXY(this->getX(), this->getY() + 3);
-	cout << char(223);
+	cout << (char)223;
 	gotoXY(this->getX() + 1, this->getY() + 3);
-	cout << char(223);
+	cout << (char)223;
 	gotoXY(this->getX() + 2, this->getY() + 3);
-	cout << char(223);
+	cout << (char)223;
 	gotoXY(this->getX() + 6, this->getY() + 3);
-	cout << char(223);
+	cout << (char)223;
 }
 
 void crawfish::draw() {
@@ -110,93 +110,93 @@ void crawfish::draw() {
 void crawfish::deleteCharForward(){
 	//row 1
 	gotoXY(this->getX() + 6, this->getY());
-	cout << " ";
+	cout << ' ';
 	gotoXY(this->getX() + 5, this->getY());
-	cout << " ";
+	cout << ' ';
 	gotoXY(this->getX() + 4, this->getY());
-	cout << " ";
+	cout << ' ';
 	gotoXY(this->getX(), this->getY());
-	cout << " ";
+	cout << ' ';
 
 	//row 2
 	gotoXY(this->getX() + 4, this->getY() + 1);
-	cout << " ";
+	cout << ' ';
 	gotoXY(this->getX() + 3, this->getY() + 1);
-	cout << " ";
+	cout << ' ';
 	gotoXY(this->getX() + 2, this->getY() + 1);
-	cout << " ";
+	cout << ' ';
 	gotoXY(this->getX() + 1, this->getY() + 1);
-	cout << " ";
+	cout << ' ';
 	gotoXY(this->getX(), this->getY() + 1);
-	cout << " ";
+	cout << ' ';
 
 	//row 3
 	gotoXY(this->getX() + 4, this->getY() + 2);
-	cout << " ";
+	cout << ' ';
 	gotoXY(this->getX() + 3, this->getY() + 2);
-	cout << " ";
-	gotoXY(this->getX() + 2, this->getX() + 2);
-	cout << " ";
-	gotoXY(this->getX() + 1, this->getX() + 2);
-	cout << " ";
+	cout << ' ';
+	gotoXY(this->getX() + 2, this->getY() + 2);
+	cout << ' ';
+	gotoXY(this->getX() + 1, this->getY() + 2);
+	cout << ' ';
 	gotoXY(this->getX(), this->getY() + 2);
-	cout << " ";
+	cout << ' ';
 
 	//row 4
 	gotoXY(this->getX() + 6, this->getY() + 3);
-	cout << " ";
+	cout << ' ';
 	gotoXY(this->getX() + 5, this->getY() + 3);
-	cout << " ";
+	cout << ' ';
 	gotoXY(this->getX() + 4, this->getY() + 3);
-	cout << " ";
+	cout << ' ';
 	gotoXY(this->getX(), this->getY() + 3);
-	cout << " ";
+	cout << ' ';
 }
 
 void crawfish::deleteCharBackward(){
 	//row 1
 	gotoXY(this->getX(), this->getY());
-	cout << " ";
+	cout << ' ';
 	gotoXY(this->getX() + 1, this->getY());
-	cout << " ";
+	cout << ' ';
 	gotoXY(this->getX() + 2, this->getY());
-	cout << " ";
+	cout << ' ';
 	gotoXY(this->getX() + 6, this->getY());
-	cout << " ";
+	cout << ' ';
 
 	//row 2
 	gotoXY(this->getX() + 2, this->getY() + 1);
-	cout << " ";
+	cout << ' ';
 	gotoXY(this->getX() + 3, this->getY() + 1);
-	cout << " ";
+	cout << ' ';
 	gotoXY(this->getX() + 4, this->getY() + 1);
-	cout << " ";
+	cout << ' ';
 	gotoXY(this->getX() + 5, this->getY() + 1);
-	cout << " ";
+	cout << ' ';
 	gotoXY(this->getX() + 6, this->getY() + 1);
-	cout << " ";
+	cout << ' ';
 
 	//row 3
 	gotoXY(this->getX() + 2, this->getY() + 2);
-	cout << " ";
+	cout << ' ';
 	gotoXY(this->getX() + 3, this->getY() + 2);
-	cout << " ";
-	gotoXY(this->getX() + 4, this->getX() + 2);
-	cout << " ";
-	gotoXY(this->getX() + 5, this->getX() + 2);
-	cout << " ";
+	cout << ' ';
+	gotoXY(this->getX() + 4, this->getY() + 2);
+	cout << ' ';
+	gotoXY(this->getX() + 5, this->getY() + 2);
+	cout << ' ';
 	gotoXY(this->getX() + 6, this->getY() + 2);
-	cout << " ";
+	cout << ' ';
 
 	//row 4
 	gotoXY(this->getX(), this->getY() + 3);
-	cout << " ";
+	cout << ' ';
 	gotoXY(this->getX() + 1, this->getY() + 3);
-	cout << " ";
+	cout << ' ';
 	gotoXY(this->getX() + 2, this->getY() + 3);
-	cout << " ";
+	cout << ' ';
 	gotoXY(this->getX() + 6, this->getY() + 3);
-	cout << " ";
+	cout << ' ';
 }
 
 void crawfish::deleteChar() {
@@ -250,6 +250,7 @@ bool crawfish::move()
 	}
 	else {
 		if (this->getX() <= 0) return false;
+		--x;
 	}
 	this->moveXY(x, y);
 	return true;

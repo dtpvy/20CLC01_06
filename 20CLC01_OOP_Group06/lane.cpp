@@ -39,10 +39,11 @@ void lane::createLane(int type, bool _light, int num, bool direction, int y)
 	{
 		tLight.setX(rand() % (WIDTH - 30) + 30);
 		tLight.setY(y);
+		tLight.set(true, rand() % greenLight);
 	}
 	if (this->direction)
 	{
-		int x = 0;
+		int x = rand() % 20;
 		for (int i = 0; i < num; i++)
 		{
 			vehicleArr.push_back(createVehicle(type, x, y));
@@ -51,7 +52,7 @@ void lane::createLane(int type, bool _light, int num, bool direction, int y)
 	}
 	else
 	{
-		int x = WIDTH;
+		int x = WIDTH - rand() % 20;
 		for (int i = 0; i < num; i++)
 		{
 			vehicleArr.push_back(createVehicle(type, x, y));
@@ -67,20 +68,20 @@ void lane::createLane(int type, int num, bool direction, int y)
 	this->direction = direction;
 	if (this->direction)
 	{
-		int x = 0;
+		int x = rand() % 20;
 		for (int i = 0; i < num; i++)
 		{
 			animalArr.push_back(createAnimal(type, x, y));
-			x -= rand() % 20 + 8;
+			x -= rand() % 20 + 15;
 		}
 	}
 	else
 	{
-		int x = WIDTH;
+		int x = WIDTH - rand() % 20;
 		for (int i = 0; i < num; i++)
 		{
 			animalArr.push_back(createAnimal(type, x, y));
-			x += (rand() % 20 + 8);
+			x += (rand() % 20 + 15);
 		}
 	}
 }
@@ -88,6 +89,7 @@ void lane::createLane(int type, int num, bool direction, int y)
 void lane::updateLane()
 {
 	updateLightTraffic();
+	deleteChar();
 	int x = WIDTH * (1 - this->direction), y = 0;
 	if (vehicleArr.size() > 0)
 	{
@@ -95,10 +97,9 @@ void lane::updateLane()
 		{
 			for (int i = 0; i < vehicleArr.size(); i++)
 			{
-				vehicleArr[i]->deleteChar();
-				if (!vehicleArr[i]->move())
+				if (this->direction)
 				{
-					if (this->direction)
+					if (!vehicleArr[i]->move())
 					{
 						x -= rand() % 20;
 						int tmp = (vehicleArr.size() + i - 1) % vehicleArr.size();
@@ -106,18 +107,23 @@ void lane::updateLane()
 						{
 							x += (vehicleArr[tmp]->getX() - 20);
 						}
+						else x -= 15;
 						y = this->row;
 						delete vehicleArr[i];
 						vehicleArr[i] = createVehicle(type, x, y);
 					}
-					else
+				}
+				else
+				{
+					if (!vehicleArr[i]->move())
 					{
 						x += rand() % 20;
 						int tmp = (vehicleArr.size() + i - 1) % vehicleArr.size();
-						if (vehicleArr[tmp]->getX() + vehicleArr[i]->getLength() >= WIDTH)
+						if (vehicleArr[tmp]->getX() + vehicleArr[tmp]->getLength() >= WIDTH)
 						{
 							x += (vehicleArr[tmp]->getX() + vehicleArr[tmp]->getLength() + 10);
 						}
+						else x += 15;
 						y = this->row;
 						delete vehicleArr[i];
 						vehicleArr[i] = createVehicle(type, x, y);
@@ -129,7 +135,7 @@ void lane::updateLane()
 		{
 			for (int i = 0; i < vehicleArr.size(); i++)
 			{
-				vehicleArr[i]->deleteChar();
+				
 				if (this->direction)
 				{
 					if (vehicleArr[i]->getX() + vehicleArr[i]->getLength() <= tLight.getX()) continue;
@@ -141,6 +147,7 @@ void lane::updateLane()
 						{
 							x += (vehicleArr[tmp]->getX() - 20);
 						}
+						else x -= 15;
 						y = this->row; 
 						delete vehicleArr[i];
 						vehicleArr[i] = createVehicle(type, x, y);
@@ -153,10 +160,11 @@ void lane::updateLane()
 					{
 						x += rand() % 20;
 						int tmp = (vehicleArr.size() + i - 1) % vehicleArr.size();
-						if (vehicleArr[tmp]->getX() + vehicleArr[i]->getLength() >= WIDTH)
+						if (vehicleArr[tmp]->getX() + vehicleArr[tmp]->getLength() >= WIDTH)
 						{
 							x += (vehicleArr[tmp]->getX() + vehicleArr[tmp]->getLength() + 10);
 						}
+						else x += 15;
 						y = this->row;
 						delete vehicleArr[i];
 						vehicleArr[i] = createVehicle(type, x, y);
@@ -168,29 +176,33 @@ void lane::updateLane()
 	
 	for (int i = 0; i < animalArr.size(); i++)
 	{
-		animalArr[i]->deleteChar();
-		if (!animalArr[i]->move())
+		if (this->direction)
 		{
-			if (this->direction)
+			if (!animalArr[i]->move())
 			{
 				x -= rand() % 20;
 				int tmp = (animalArr.size() + i - 1) % animalArr.size();
 				if (animalArr[tmp]->getX() <= 0)
 				{
-					x += (animalArr[tmp]->getX() - 8);
+					x += (animalArr[tmp]->getX() - 15);
 				}
-				y = this->row; 
+				else x -= 20;
+				y = this->row;
 				delete animalArr[i];
 				animalArr[i] = createAnimal(type, x, y);
 			}
-			else
+		}
+		else
+		{
+			if (!animalArr[i]->move())
 			{
 				x += rand() % 20;
 				int tmp = (animalArr.size() + i - 1) % animalArr.size();
 				if (animalArr[tmp]->getX() + animalArr[tmp]->getLength() >= WIDTH)
 				{
-					x += (animalArr[tmp]->getX() + animalArr[tmp]->getLength() + 8);
+					x += (animalArr[tmp]->getX() + animalArr[tmp]->getLength() + 10);
 				}
+				else x += 20;
 				y = this->row;
 				delete animalArr[i];
 				animalArr[i] = createAnimal(type, x, y);
@@ -304,45 +316,42 @@ animal*& lane::createAnimal(int type, int x, int y)
 	return tmp;
 }
 
+bool lane::checkInScreen(vehicle* vehicle)
+{
+	if (vehicle->getX() > 2 && vehicle->getX() + vehicle->getLength() < WIDTH)
+	{
+		return true;
+	}
+	return false;
+}
+
+bool lane::checkInScreen(animal* animal)
+{
+	if (animal->getX() > 2 && animal->getX() + animal->getLength() < WIDTH)
+	{
+		return true;
+	}
+	return false;
+}
+
 
 void lane::draw()
 {
-	if (this->direction)
+	for (int i = 0; i < vehicleArr.size(); i++)
 	{
-		for (int i = 0; i < vehicleArr.size(); i++)
+		if (checkInScreen(vehicleArr[i]))
 		{
-			if (vehicleArr[i]->getX() > 2 && vehicleArr[i]->getX() < WIDTH)
-			{
-				vehicleArr[i]->draw();
-			}
-
+			vehicleArr[i]->draw();
 		}
-		for (int i = 0; i < animalArr.size(); i++)
-		{
-			if (animalArr[i]->getX() > 2 && animalArr[i]->getX() < WIDTH)
-			{
-				animalArr[i]->draw();
-			}
 
-		}
 	}
-	else 
+	for (int i = 0; i < animalArr.size(); i++)
 	{
-		for (int i = 0; i < vehicleArr.size(); i++)
+		if (checkInScreen(animalArr[i]))
 		{
-			if (vehicleArr[i]->getX() > 2 && vehicleArr[i]->getX() + vehicleArr[i]->getLength() < WIDTH)
-			{
-				vehicleArr[i]->draw();
-			}
+			animalArr[i]->draw();
+		}
 
-		}
-		for (int i = 0; i < animalArr.size(); i++)
-		{
-			if (animalArr[i]->getX() > 2 && animalArr[i]->getX() + animalArr[i]->getLength() < WIDTH)
-			{
-				animalArr[i]->draw();
-			}
-		}
 	}
 }
 
@@ -351,25 +360,30 @@ void lane::drawLane()
 	if (this->type == 0)
 	{
 		TextColor(ColorCode_Grey);
-		for (int i = 2; i < WIDTH; i++)
+		if (row - 3 > 0)
 		{
-			gotoXY(i, this->row-3);
-			cout << (char)205;
+			for (int i = 2; i < WIDTH; i++)
+			{
+				gotoXY(i, this->row - 3);
+				cout << (char)205;
+			}
 		}
 	}
 	else 
 	{
 		TextColor(ColorCode_DarkWhite);
-		for (int i = 1; i < WIDTH; i++)
+		if (row - 1 > 0)
 		{
-			if (i % 5 != 0)
+			for (int i = 1; i < WIDTH; i++)
 			{
-				gotoXY(i, this->row - 1);
-				cout << (char)205;
+				if (i % 5 != 0)
+				{
+					gotoXY(i, this->row - 1);
+					cout << (char)205;
+				}
 			}
 		}
 
-		
 		draw();
 		if (_light)
 		{
@@ -382,14 +396,14 @@ void lane::deleteChar()
 {
 	for (int i = 0; i < vehicleArr.size(); i++)
 	{
-		if (vehicleArr[i]->getX() > 0 && vehicleArr[i]->getX() < WIDTH)
+		if (checkInScreen(vehicleArr[i]))
 		{
 			vehicleArr[i]->deleteChar();
 		}
 	}
 	for (int i = 0; i < animalArr.size(); i++)
 	{
-		if (animalArr[i]->getX() > 0 && animalArr[i]->getX() < WIDTH)
+		if (checkInScreen(animalArr[i]))
 		{
 			animalArr[i]->deleteChar();
 		}
@@ -428,18 +442,20 @@ void lane::add(int type, int x, int y)
 	}
 }
 
-void lane::set(int type, int _light, light tLight, int _direction)
+void lane::set(int type, int _light, light tLight, int _direction, int row)
 {
 	this->type = type;
 	this->_light = _light;
 	this->tLight = tLight;
 	this->direction = _direction;
+	this->row = row;
 }
 
-void lane::set(int type, int light, int _direction)
+void lane::set(int type, int light, int _direction, int row)
 {
 	this->type = type;
 	this->_light = light;
 	this->direction = _direction;
+	this->row = row;
 }
 
