@@ -39,6 +39,7 @@ public:
 	void createLane(int type, int num, bool direction, int y);
 	void draw();
 	void drawLane();
+	void deleteLane();
 	void updateLane();
 	void updateLightTraffic();
 	void deleteChar();
@@ -52,6 +53,7 @@ public:
 	animal*& createAnimal(int type, int x, int y);
 	bool checkInScreen(vehicle* vehicle);
 	bool checkInScreen(animal* animal);
+	~lane();
 };
 
 #endif

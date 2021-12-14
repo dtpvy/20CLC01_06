@@ -1,99 +1,79 @@
 #include "people.h"
 
 
-people::people(): point((bRIGHT + 3) / 2, bBOTTOM)
+people::people(): point((bRIGHT + bLEFT) / 2, bBOTTOM)
 {
 	this->m_State = true;
-	this->remain = LIFE;
-	old_X = point::getX();
-	old_Y = point::getY();
 }
 
 void people::goUp()
 {
-	old_X = point::getX();
-	old_Y = point::getY();
-	if (old_Y <= bTOP)
-		return;
-	point::setY(old_Y - 1);
+	if (this->getY() - 1 < bTOP) return;
+	this->moveXY(this->getX(), this->getY() - 1);
 }
 
 
 void people::goDown()
 {
-	old_X = point::getX();
-	old_Y = point::getY();
-	if (old_Y >= bBOTTOM)
-		return;
-	point::setY(old_Y + 1);
+	if (this->getY() + 1 > bBOTTOM) return;
+	this->moveXY(this->getX(), this->getY() + 1);
 }
 
 void people::goRight()
 {
-	old_X = point::getX();
-	old_Y = point::getY();
-	if (old_X >= bRIGHT)
-		return;
-	point::setX(old_X + 1);
+	if (this->getX() + 1 > bRIGHT) return;
+	this->moveXY(this->getX() + 1, this->getY());
 }
 
 void people::goLeft()
 {
-	old_X = point::getX();
-	old_Y = point::getY();
-	if (old_X <= bLEFT)
-		return;
-	point::setX(old_X - 1);
+	if (this->getX() - 1 < bLEFT) return;
+	this->moveXY(this->getX() - 1, this->getY());
 }
 
 void people::reset()
 {
-	remain -= 1;
-	point::setX((bRIGHT + 3) / 2);
-	point::setY(bBOTTOM);
-	this->old_X = point::getX();
-	this->old_Y = point::getY();
-	this->m_State = true;
+	this->setStatus(true);
+	this->moveXY((bRIGHT + bLEFT) / 2, bBOTTOM);
 }
 
 bool people::isFinish()
 {
-	if (point::getX() == bTOP && remain > 0)
-		return true;
-	else
-		return false;
+	return ((this->getY() == 0 ) && this->m_State);
 }
 
 bool people::isDead()
 {
-	if (remain <= 0)
-		return true;
-	else
-		return false;
+	return !m_State;
 }
 
 void people::draw()
 {
 	TextColor(14);
-	gotoXY(point::getX() + 1, point::getY());
+	gotoXY(this->getX() + 1, this->getY());
 	cout << (char)2;
 	TextColor(11);
-	gotoXY(point::getX(), point::getY() + 1);
+	gotoXY(this->getX(), this->getY() + 1);
 	cout << "<" << (char)178 << ">";
 	TextColor(10);
-	gotoXY(point::getX() + 1, point::getY() + 2);
+	gotoXY(this->getX() + 1, this->getY() + 2);
 	cout << (char)206;
 }
 
 void people::deleteChar()
 {
 	TextColor(0);
-	gotoXY(old_X + 1, old_Y);
+	gotoXY(this->getX() + 1, this->getY());
 	cout << (char)219;
-	gotoXY(old_X, old_Y + 1);
+	gotoXY(this->getX(), this->getY() + 1);
 	cout << (char)219 << (char)219 << (char)219;
-	gotoXY(old_X + 1, old_Y + 2);
+	gotoXY(this->getX() + 1, this->getY() + 2);
 	cout << (char)219;
+}
+
+void people::setStatus(bool status)
+{
+	this->m_State = status;
 }
 
 

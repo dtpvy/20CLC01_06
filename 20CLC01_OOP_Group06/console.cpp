@@ -94,3 +94,14 @@ int getHeight()
 	return csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
 }
 
+
+void clearscreen(HANDLE hOut)
+{
+	COORD Position;
+
+	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	Position.X = 0;
+	Position.Y = 0;
+	SetConsoleCursorPosition(hOut, Position);
+}

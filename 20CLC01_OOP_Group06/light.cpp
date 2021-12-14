@@ -75,3 +75,11 @@ void light::writeFile(fstream& fo)
 {
 	fo << this->_status << " " << this->_time << " " << this->getX() << " " << this->getY();
 }
+
+void light::deleteChar()
+{
+	gotoXY(this->getX(), this->getY());
+	cout << ' ';
+	gotoXY(this->getX(), this->getY() + 1);
+	cout << ' ';
+}

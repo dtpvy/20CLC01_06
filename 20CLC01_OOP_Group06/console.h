@@ -1,4 +1,5 @@
 #pragma once
+
 #ifndef _console_h
 #define _console_h
 
@@ -71,7 +72,7 @@ void TextColor(int color);
 //end----------------------Screen----------------------end
 int getWidth();
 int getHeight();
-
+void clearscreen(HANDLE hOut);
 #endif
 
 #endif // !_console_h

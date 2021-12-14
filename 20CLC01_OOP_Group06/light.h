@@ -20,6 +20,7 @@ public:
 	void updateTime();
 	void draw();
 	void writeFile(fstream& fo);
+	void deleteChar();
 };
 
 
