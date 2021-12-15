@@ -162,7 +162,10 @@ void dog::deleteChar() {
 bool dog::checkCrashForward(people p) {
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 7; j++) {
-			if (this->getX() + j == p.getX() && this->getY() + i == p.getY()) {
+			if (this->getX() + j == p.getX() + 1 && (this->getY() + i == p.getY() || this->getY() + i == p.getY() + 2)) {
+				return true;
+			}
+			if ((this->getX() + j == p.getX() || this->getX() + j == p.getX() + 1 || this->getX() + j == p.getX() + 2) && (this->getY() + i == p.getY() + 1)) {
 				return true;
 			}
 		}
@@ -173,7 +176,10 @@ bool dog::checkCrashForward(people p) {
 bool dog::checkCrashBackward(people p) {
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 7; j++) {
-			if (this->getX() + j == p.getX() && this->getY() + i == p.getY()) {
+			if (this->getX() + j == p.getX() + 1 && (this->getY() + i == p.getY() || this->getY() + i == p.getY() + 2)) {
+				return true;
+			}
+			if ((this->getX() + j == p.getX() || this->getX() + j == p.getX() + 1 || this->getX() + j == p.getX() + 2) && (this->getY() + i == p.getY() + 1)) {
 				return true;
 			}
 		}

@@ -210,7 +210,10 @@ void crawfish::deleteChar() {
 bool crawfish::checkCrashForward(people p) {
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 7; j++) {
-			if (this->getX() + j == p.getX() && this->getY() + i == p.getY()) {
+			if (this->getX() + j == p.getX() + 1 && (this->getY() + i == p.getY() || this->getY() + i == p.getY() + 2)) {
+				return true;
+			}
+			if ((this->getX() + j == p.getX() || this->getX() + j == p.getX() + 1 || this->getX() + j == p.getX() + 2) && (this->getY() + i == p.getY() + 1)) {
 				return true;
 			}
 		}
@@ -219,9 +222,12 @@ bool crawfish::checkCrashForward(people p) {
 }
 
 bool crawfish::checkCrashBackward(people p) {
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 7; j++) {
-			if (this->getX() + j == p.getX() && this->getY() + i == p.getY()) {
+			if (this->getX() + j == p.getX() + 1 && (this->getY() + i == p.getY() || this->getY() + i == p.getY() + 2)) {
+				return true;
+			}
+			if ((this->getX() + j == p.getX() || this->getX() + j == p.getX() + 1 || this->getX() + j == p.getX() + 2) && (this->getY() + i == p.getY() + 1)) {
 				return true;
 			}
 		}
