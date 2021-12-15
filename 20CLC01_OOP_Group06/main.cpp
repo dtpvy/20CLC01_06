@@ -85,6 +85,7 @@ int main()
 			}
 			else if (temp == 'Y') 
 			{
+				cg->resetLv();
 				cg->resetGame();
 				cg->startGame(cg->getLvMax());
 			}

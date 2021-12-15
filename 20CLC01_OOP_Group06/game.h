@@ -53,6 +53,7 @@ public:
 	people getPeople();
 	bool isRunning();
 	void resetGame();
+	void resetLv();
 	void exitGame(thread* t);
 	void startGame(int lvMax);
 	void loadGame();

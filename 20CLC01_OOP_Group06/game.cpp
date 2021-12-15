@@ -35,19 +35,19 @@ void game::drawGame()
 
 void game::drawHome()
 {
-	int x = 20;
+	int x = 28;
 	int color = rand() % 7 + 9;
 	TextColor(color);
 	gotoXY(x, 2);
 	cout << " ******  *******    *******   *****   *****  **    **       *******    *******      ***      ******" << endl;
 	gotoXY(x, 3);
-	cout << "**       **   **    **   **   **      **      **  **	**   **    **   **     ** **     **   **" << endl;
+	cout << "**       **   **    **   **   **      **      **  **        **   **    **   **     ** **     **   **" << endl;
 	gotoXY(x, 4);
-	cout << "**	     ** * **    **   **   *****   *****     **		** * **    **   **    **   **    **    **" << endl;
+	cout << "**       ** * **    **   **   *****   *****     **          ** * **    **   **    **   **    **    **" << endl;
 	gotoXY(x, 5);
-	cout << "**	     **   **    **   **	     **      **     **		**   **    **   **   ** *** **   **   **" << endl;
+	cout << "**       **   **    **   **      **      **     **          **   **    **   **   ** *** **   **   **" << endl;
 	gotoXY(x, 6);
-	cout << " ******  **    **   *******   *****   *****     **		**    **   *******  **       **  ******" << endl;
+	cout << " ******  **    **   *******   *****   *****     **          **    **   *******  **       **  ******" << endl;
 	TextColor(15);
 
 	for (int i = 0; i < getWidth(); i++)
@@ -930,6 +930,7 @@ void game::drawDie()
 		cout << (char)219;
 	}
 	TextColor(7);
+	player.setStatus(false);
 	playSound((char*)"play die.mp3", 1);
 }
 
@@ -1026,6 +1027,12 @@ void game::resetGame()
 	{
 		laneArr[i].reset();
 	}
+}
+
+void game::resetLv()
+{
+	this->lv = 1;
+	this->score = 0;
 }
 
 void game::exitGame(thread* t)
