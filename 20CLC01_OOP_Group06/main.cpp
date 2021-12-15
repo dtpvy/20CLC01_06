@@ -21,6 +21,8 @@ void ShowCur(bool CursorVisibility) // xóa dấu con trỏ
 
 void SubThread()
 {
+	//system("cls");
+	//cg->drawMenuGame();
 	while (cg->isRunning())
 	{
 		if (!cg->getPeople().isDead()) //Nếu người vẫn còn sống
@@ -32,8 +34,6 @@ void SubThread()
 		cg->drawGame(); 
 		if (cg->checkLane())
 		{
-			cg->playSound((char*)"stop nen2.mp3", 0);
-			cg->playSound((char*)"play die.mp3", 1);
 			cg->drawDie();
 			system("pause");
 		}
@@ -41,8 +41,6 @@ void SubThread()
 		{
 			if (cg->lvUp())
 			{
-				cg->playSound((char*)"stop nen2.mp3", 0);
-				cg->playSound((char*)"play win.mp3", 1);
 				cg->drawWin();
 				system("pause");
 			}
@@ -51,16 +49,12 @@ void SubThread()
 	}
 }
 
-
 int main()
 {
 	cg = new game;
 	char temp;
 	SetWindowSize(cWidth, cHeight);
-	cg->playSound((char*)"play nen1.mp3", 1);
 	cg->drawMenuHome();
-	cg->playSound((char*)"stop nen1.mp3", 0);
-	cg->playSound((char*)"play nen2.mp3", 1);
 	thread* t1 = new thread(SubThread);
 	while (1)
 	{
@@ -70,7 +64,10 @@ int main()
 		{
 			if (temp == 'E' || temp == 27)
 			{
+				
+				cg->resetGame();
 				cg->exitGame(t1);
+				t1 = new thread(SubThread);
 			}
 			else if (temp == 'P')
 			{
@@ -104,9 +101,20 @@ int main()
 				cg->resetGame();
 				cg->startGame(cg->getLvMax());
 			}
-			else {
+			else if (temp == 'L')
+			{
+			cg->pauseGame((*t1).native_handle());
+			cg->saveGame((*t1).native_handle());
+			}
+			else if (temp == 'T')
+			{
+			cg->pauseGame((*t1).native_handle());
+			cg->loadGame((*t1).native_handle());
+			}
+			else if (temp == 'E' || temp == 27) {
+				cg->resetGame();
 				cg->exitGame(t1);
-				break;
+				t1 = new thread(SubThread);
 			}
 		}
 	}

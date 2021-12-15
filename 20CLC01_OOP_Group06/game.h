@@ -64,6 +64,7 @@ public:
 	void updateLane();
 	bool checkLane();
 	void playSound(char* name, bool sound);
+	void stopSound();
 };
 
 #endif // !_game_h

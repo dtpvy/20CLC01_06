@@ -130,7 +130,7 @@ void game::drawMenuHome()
 	int x = getWidth();
 	int y = 13;
 	int j = 0;
-
+	playSound((char*)"play nen1.mp3", 1);
 	while (1)
 	{
 		TextColor(7);
@@ -183,6 +183,7 @@ void game::drawMenuHome()
 						if (j == 0) j++;
 						else
 						{
+							playSound((char*)"stop nen1.mp3", 1);
 							startGame((pos + 1) * 10);
 							return;
 						}
@@ -191,6 +192,7 @@ void game::drawMenuHome()
 					{
 						if (j == 1)
 						{
+							playSound((char*)"stop nen1.mp3", 1);
 							startGame((pos + 1) * 10);
 						}
 						else loadGame();
@@ -200,6 +202,7 @@ void game::drawMenuHome()
 					{
 						if (j == 1)
 						{
+							playSound((char*)"stop nen1.mp3", 1);
 							startGame((pos + 1) * 10);
 						}
 						else settingGame();
@@ -332,6 +335,7 @@ int game::getLvMax()
 
 void game::startGame(int lvMax)
 {
+	stopSound();
 	laneArr.clear();
 	this->player.setStatus(true);
 	this->lvMax = lvMax;
@@ -339,6 +343,7 @@ void game::startGame(int lvMax)
 	drawMenuGame();
 	createGame();
 	drawGame();
+	playSound((char*)"play nen2.mp3 repeat", 1);
 }
 
 void game::loadGame()
@@ -799,6 +804,7 @@ void game::settingGame()
 				if (pos == 1)
 				{
 					this->sound = false;
+					stopSound();
 					drawMenuHome();
 					return;
 				}
@@ -848,12 +854,28 @@ bool game::checkLane()
 
 void game::playSound(char* name, bool sound)
 {
-	if (this->sound == false && sound == 1) return;
-	mciSendStringA(name, 0, NULL, 0);
+	if (sound == 1)
+	{
+		if (this->sound) mciSendStringA(name, 0, NULL, 0);
+	}
+	else
+	{
+		mciSendStringA(name, 0, NULL, 0);
+	}
+	
+}
+
+void game::stopSound()
+{
+	playSound((char*)"stop nen1.mp3", 0);
+	playSound((char*)"stop nen2.mp3", 0);
+	playSound((char*)"stop die.mp3", 0);
+	playSound((char*)"stop win.mp3", 0);
 }
 
 void game::drawDie()
 {
+	stopSound();
 	char s[] = "YOU ARE DIE!";
 	int x = WIDTH + 10;
 	int y = 0;
@@ -908,10 +930,12 @@ void game::drawDie()
 		cout << (char)219;
 	}
 	TextColor(7);
+	playSound((char*)"play die.mp3", 1);
 }
 
 void game::drawWin()
 {
+	stopSound();
 	char s[] = "YOU ARE WINER!";
 	int x = WIDTH + 10;
 	int y = 0;
@@ -966,6 +990,7 @@ void game::drawWin()
 		cout << (char)219;
 	}
 	TextColor(7);
+	playSound((char*)"play win.mp3", 1);
 }
 
 int game::speedGame()
@@ -1005,10 +1030,10 @@ void game::resetGame()
 
 void game::exitGame(thread* t)
 {
+	stopSound();
 	player.setStatus(false);
 	t->join();
-	gotoXY(0, HEIGHT + 1);
-	exit(0);
+	drawMenuHome();
 }
 
 
