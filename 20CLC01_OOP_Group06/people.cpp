@@ -49,15 +49,31 @@ bool people::isDead()
 
 void people::draw()
 {
-	TextColor(14);
-	gotoXY(this->getX() + 1, this->getY());
-	cout << (char)2;
-	TextColor(11);
-	gotoXY(this->getX(), this->getY() + 1);
-	cout << "<" << (char)178 << ">";
-	TextColor(10);
-	gotoXY(this->getX() + 1, this->getY() + 2);
-	cout << (char)206;
+	if (isDead())
+	{
+		TextColor(12);
+		gotoXY(this->getX() + 1, this->getY());
+		cout << (char)2;
+		TextColor(12);
+		gotoXY(this->getX(), this->getY() + 1);
+		cout << "<" << (char)178 << ">";
+		TextColor(12);
+		gotoXY(this->getX() + 1, this->getY() + 2);
+		cout << (char)206;
+	}
+	else
+	{
+		TextColor(14);
+		gotoXY(this->getX() + 1, this->getY());
+		cout << (char)2;
+		TextColor(11);
+		gotoXY(this->getX(), this->getY() + 1);
+		cout << "<" << (char)178 << ">";
+		TextColor(10);
+		gotoXY(this->getX() + 1, this->getY() + 2);
+		cout << (char)206;
+	}
+	
 }
 
 void people::deleteChar()

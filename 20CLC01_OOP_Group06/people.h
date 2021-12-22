@@ -14,7 +14,6 @@ class people: public point
 {
 private:
 	bool m_State;
-
 public:
 	people();
 	//people(int,int)
@@ -25,7 +24,7 @@ public:
 	void goDown();
 	bool isFinish();
 	bool isDead();
-	void draw();     
+	void draw();
 	void deleteChar();
 	void setStatus(bool status);
 };

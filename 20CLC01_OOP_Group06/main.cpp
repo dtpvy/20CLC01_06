@@ -34,6 +34,7 @@ void SubThread()
 		cg->drawGame(); 
 		if (cg->checkLane())
 		{
+			cg->getPeople().draw();
 			cg->drawDie();
 			system("pause");
 		}
@@ -104,13 +105,13 @@ int main()
 			}
 			else if (temp == 'L')
 			{
-			cg->pauseGame((*t1).native_handle());
-			cg->saveGame((*t1).native_handle());
+				cg->pauseGame((*t1).native_handle());
+				cg->saveGame((*t1).native_handle());
 			}
 			else if (temp == 'T')
 			{
-			cg->pauseGame((*t1).native_handle());
-			cg->loadGame((*t1).native_handle());
+				cg->pauseGame((*t1).native_handle());
+				cg->loadGame((*t1).native_handle());
 			}
 			else if (temp == 'E' || temp == 27) {
 				cg->resetGame();
