@@ -429,6 +429,8 @@ void game::loadGame()
 	fi >> this->score >> this->lv >> this->lvMax >> status >> n;
 	player.readFile(fi);
 	player.setStatus(status);
+	fi >> this->score >> this->lv >> this->lvMax >> n;
+	player.readFile(fi);
 	int tmp = 0, j = 0;
 	for (int i = 0; i < n; i++)
 	{
@@ -577,6 +579,7 @@ void game::loadGame(HANDLE t)
 	int status;
 	fi >> this->score >> this->lv >> this->lvMax >> status >> n;
 	player.setStatus(status);
+	fi >> this->score >> this->lv >> this->lvMax >> n;
 	player.readFile(fi);
 	int tmp = 0, j = 0;
 	for (int i = 0; i < n; i++)
@@ -712,6 +715,7 @@ void game::saveGame(HANDLE t)
 	gotoXY(61, 17);
 	cout << "[";
 	fo << this->score << " " << this->lv << " " << this->lvMax << " " << " " << !this->player.isDead() << " " << this->getLane() << endl;
+	fo << this->score << " " << this->lv << " " << this->lvMax << " " << this->getLane() << endl;
 	this->player.writeFile(fo);
 	fo << endl;
 	int tmp = 0, j = 0;

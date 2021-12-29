@@ -52,7 +52,6 @@ void SubThread()
 
 int main()
 {
-	ShowCur(false);
 	cg = new game;
 	char temp;
 	SetWindowSize(cWidth, cHeight);
