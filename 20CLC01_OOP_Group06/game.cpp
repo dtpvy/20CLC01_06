@@ -401,7 +401,7 @@ void game::loadGame()
 				}
 			}
 			else {
-				if ((int)c == 8 && file.size() > 0) file.pop_back();
+				if ((int)c == 8 && file.size() > 0) file.pop_back(), cout << ' ';
 				if ((int)c != 8) file.push_back(c);
 			}
 		}
@@ -553,7 +553,7 @@ void game::loadGame(HANDLE t)
 				}
 			}
 			else {
-				if ((int)c == 8 && file.size() > 0) file.pop_back();
+				if ((int)c == 8 && file.size() > 0) file.pop_back(), cout << ' ';
 				if ((int)c != 8) file.push_back(c);
 			}
 		}

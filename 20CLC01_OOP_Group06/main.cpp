@@ -77,11 +77,13 @@ int main()
 			}
 			else if (temp == 'L')
 			{
+				ShowCur(true);
 				cg->pauseGame((*t1).native_handle());
 				cg->saveGame((*t1).native_handle());
 			}
 			else if (temp == 'T')
 			{
+				ShowCur(true);
 				cg->pauseGame((*t1).native_handle());
 				cg->loadGame((*t1).native_handle());
 			}
@@ -106,11 +108,13 @@ int main()
 			}
 			else if (temp == 'L')
 			{
+				ShowCur(true);
 				cg->pauseGame((*t1).native_handle());
 				cg->saveGame((*t1).native_handle());
 			}
 			else if (temp == 'T')
 			{
+				ShowCur(true);
 				cg->pauseGame((*t1).native_handle());
 				cg->loadGame((*t1).native_handle());
 			}
